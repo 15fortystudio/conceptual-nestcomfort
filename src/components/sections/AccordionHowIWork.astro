@@ -7,9 +7,22 @@ export async function getStaticPaths() {
 	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
 
-const { lang = 'es' } = Astro.params;
+type Lang = 'es' | 'en';
 
-const translations = {
+interface Block {
+	title: string;
+	paragraph: string;
+}
+
+interface Translations {
+	heading: string;
+	blocks: Block[];
+}
+
+// Hacer más explícito el tipo de Astro.params
+const { lang = 'es' } = Astro.params as { lang: Lang };
+
+const translations: Record<Lang, Translations> = {
 	es: {
 		heading: '¿Cómo trabajo?',
 		blocks: [
@@ -70,12 +83,14 @@ const t = translations[lang] ?? translations['es'];
 	<div class="border-accent radius -mt-2 border-2 p-6 text-left">
 		{
 			t.blocks.map((block, index) => (
-				<details key={index} class="group border-accent radius border-b py-4">
-					<summary class="group-open:text-primary cursor-pointer font-medium transition-all">
-						{block.title}
-					</summary>
-					<p class="mt-2">{block.paragraph}</p>
-				</details>
+				<div key={index}>
+					<details class="group border-accent radius border-b py-4">
+						<summary class="group-open:text-primary cursor-pointer font-medium transition-all">
+							{block.title}
+						</summary>
+						<p class="mt-2">{block.paragraph}</p>
+					</details>
+				</div>
 			))
 		}
 	</div>

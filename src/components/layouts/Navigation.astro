@@ -1,8 +1,28 @@
 ---
-// src/components/Navigation.astro
-const { lang } = Astro.props;
+// src/components/layouts/Navigation.astro
 
-const translations = {
+type Lang = 'es' | 'en';
+const lang = (Astro.props.lang ?? 'es') as Lang;
+
+// Tipamos el objeto translations completamente
+type TranslationEntry = {
+	label: string;
+	path: string;
+};
+
+type Translations = {
+	[lang in Lang]: {
+		services: TranslationEntry;
+		aboutUs: TranslationEntry;
+		portfolio: TranslationEntry;
+		gallery: TranslationEntry;
+		blog: TranslationEntry;
+		testimonies: TranslationEntry;
+		contact: TranslationEntry;
+	};
+};
+
+const translations: Translations = {
 	es: {
 		services: { label: 'Servicios', path: 'services' },
 		aboutUs: { label: 'Sobre Nosotros', path: 'about-us' },

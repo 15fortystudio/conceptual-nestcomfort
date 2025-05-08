@@ -12,10 +12,10 @@ import TeamCard from '../../components/ui/TeamCard.astro';
 // ----- Image
 import AboutBanner from '../../assets/images/bg/bg-about.webp';
 
-import ValeriaMuñoz from '../../assets/images/team/Valeria-Muñoz.webp';
-import AndreaTorres from '../../assets/images/team/Andrea-Torres.webp';
-import LuisMartinez from '../../assets/images/team/Luis-Martinez.webp';
-import SofiaRivas from '../../assets/images/team/Sofia-Rivas.webp';
+import ValeriaMuñoz from '../../assets/images/team/valeria-munoz.webp';
+import AndreaTorres from '../../assets/images/team/andrea-torres.webp';
+import LuisMartinez from '../../assets/images/team/luis-martinez.webp';
+import SofiaRivas from '../../assets/images/team/sofia-rivas.webp';
 import AccordionDynamics from '../../components/sections/AccordionDynamics.astro';
 import AccordionVision from '../../components/sections/AccordionVision.astro';
 import OurTeam from '../../components/sections/OurTeam.astro';
@@ -27,9 +27,10 @@ export async function getStaticPaths() {
 	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
 
-const { lang = 'es' } = Astro.params;
+type Lang = 'es' | 'en';
+const lang = (Astro.params.lang ?? 'es') as Lang;
 
-const translations = {
+const translations: Record<Lang, { heading: string }> = {
 	es: {
 		heading: 'Conoce a las personas que hacen posible cada proyecto:',
 	},

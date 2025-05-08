@@ -32,10 +32,16 @@ export async function getStaticPaths() {
 	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
 
-const { lang = 'es' } = Astro.props;
+type Lang = 'es' | 'en';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang = 'es' } = Astro.props as Props;
 
 // Traducciones directamente en el componente
-const translations = {
+const translations: Record<Lang, { heading: string; alt: string }> = {
 	es: {
 		heading:
 			'El proceso es cercano, claro y pensado en cada detalle desde el primer contacto hasta la entrega final.',
@@ -48,7 +54,7 @@ const translations = {
 	},
 };
 
-const t = translations[lang] ?? translations['es'];
+const t = translations[lang];
 ---
 
 <BaseLayout lang={lang}>
