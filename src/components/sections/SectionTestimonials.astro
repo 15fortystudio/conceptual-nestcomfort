@@ -1,0 +1,41 @@
+---
+// src/components/SectionTestimonials.astro
+
+import { getCollection } from 'astro:content';
+import TestimoniesCarousel from '../../components/sections/TestimoniesCarousel.astro';
+
+const { lang = 'es' } = Astro.props;
+
+// Traducciones
+const translations = {
+	es: {
+		section: 'Sección de testimonios',
+		title: 'Lo que nuestros clientes dicen',
+		paragraph:
+			'Nada nos enorgullece más que la satisfacción de quienes han confiado en nosotros. Conoce sus experiencias, sus palabras y cómo transformamos juntos sus espacios en hogares llenos de bienestar, estilo y calidez.',
+	},
+	en: {
+		section: 'Testimonies section',
+		title: 'What our clients say',
+		paragraph:
+			'Nothing makes us prouder than the satisfaction of those who have trusted us. Discover their experiences, their words, and how we’ve worked together to transform their spaces into warm, stylish, and well-being-centered homes.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+
+const allTestimonies = await getCollection('testimonies');
+const testimoniesToShow = allTestimonies.map((t) => ({ ...t.data })).filter((t) => t.lang === lang);
+
+console.log('Testimonios filtrados:', testimoniesToShow);
+---
+
+<section class="responsive flex flex-col items-center gap-8 text-center md:gap-16">
+	<span class="sr-only">{t.section}</span>
+	<h2>{t.title}</h2>
+	<p class="text-secondary">{t.paragraph}</p>
+
+	<div class="mx-auto flex w-full flex-col gap-4 md:flex-row md:gap-16">
+		<TestimoniesCarousel testimoniesToShow={testimoniesToShow} lang={lang} />
+	</div>
+</section>

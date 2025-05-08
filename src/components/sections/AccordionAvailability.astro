@@ -1,0 +1,36 @@
+---
+// src/components/section/AccordionAvailability.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		heading: 'Disponibilidad',
+		paragraph01:
+			'Mis servicios son bajo demanda, con cupos limitados cada mes para garantizar un acompañamiento de calidad.',
+		paragraph02: 'Lo ideal es reservar con al menos 2 semanas de anticipación.',
+	},
+	en: {
+		heading: 'Availability',
+		paragraph01:
+			'My services are on demand, with limited availability each month to ensure quality support.',
+		paragraph02: " It's best to book at least two weeks in advance.",
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.heading}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<p>{t.paragraph01}</p>
+		<p>{t.paragraph02}</p>
+	</div>
+</details>

@@ -1,0 +1,60 @@
+---
+// src/components/ServicesCard.astro
+import { Picture } from 'astro:assets';
+const { lang = 'es', Key, imageSrc } = Astro.props;
+
+const translations = {
+	es: {
+		paragraph:
+			'Nuestra experiencia en diseño transforma espacios en lugares funcionales y llenos de intención.',
+		blocks: [
+			{
+				title: 'Diseño Interior Residencial',
+				paragraph:
+					'Transformo espacios en hogares que reflejan la personalidad y necesidades de quienes los habitan. Este servicio resuelve la falta de armonía, funcionalidad o identidad en espacios cotidianos.',
+			},
+			{
+				title: 'Asesoría en Diseño Interior',
+				paragraph:
+					'Sesiones personalizadas para resolver dudas de distribución, estilo o decoración. Ideal para quienes necesitan una guía clara sin comprometerse a un proyecto completo. Ayuda a tomar decisiones seguras sin perder tiempo o recursos.',
+			},
+			{
+				title: 'Rediseño y Renovación de Espacios',
+				paragraph:
+					'Aprovecho lo que ya tienes para darle nueva vida a tu hogar. A través de cambios estratégicos en mobiliario, iluminación y decoración, creamos un entorno renovado y con intención. Es perfecto para quienes desean un cambio sin hacer una reforma total.',
+			},
+		],
+	},
+	en: {
+		paragraph: 'Our design experience transforms spaces into functional and meaningful places.',
+		blocks: [
+			{
+				title: 'Residential Interior Design',
+				paragraph:
+					'I transform spaces into homes that reflect the personality and needs of those who live in them. This service addresses the lack of harmony, functionality, or identity in everyday spaces.',
+			},
+			{
+				title: 'Interior Design Consultation',
+				paragraph:
+					'Personalized sessions to solve layout, style, or decoration doubts. Ideal for those who need clear guidance without committing to a full project. It helps you make confident decisions without wasting time or resources.',
+			},
+			{
+				title: 'Space Redesign and Renovation',
+				paragraph:
+					'I make the most of what you already have to give new life to your home. Through strategic changes in furniture, lighting, and decor, we create a renewed and intentional environment. Perfect for those who want change without a full remodel.',
+			},
+		],
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<div class="bg-accent radius flex flex-col items-center gap-4 p-8 text-center shadow-2xl md:p-4">
+	<figure class="h-[96px] w-[96px]">
+		<Picture src={imageSrc} alt={t.blocks[Key]?.title} class="h-full w-full object-cover" />
+		<figcaption class="sr-only">{t.blocks[Key]?.title}</figcaption>
+	</figure>
+	<h2>{t.blocks[Key]?.title}</h2>
+	<p>{t.blocks[Key]?.paragraph}</p>
+</div>

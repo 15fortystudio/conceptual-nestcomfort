@@ -1,0 +1,19 @@
+---
+// src/components/layouts/Header.astro
+import Lang from '../../components/ui/Lang.astro';
+import HamburguerMenu from './HamburguerMenu.astro';
+import Navigation from './Navigation.astro';
+
+const { lang = 'es' } = Astro.props;
+---
+
+<header class="bg-accent mt-4 h-full w-full shadow-2xl">
+	<div class="responsive flex items-center justify-between gap-4 p-2">
+		<a href={`/${lang}/`} class="logo">Nest Comfort</a>
+		<Navigation lang={lang} />
+		<HamburguerMenu lang={lang} />
+		<divc class="hidden xl:flex">
+			<Lang lang={lang} />
+		</divc>
+	</div>
+</header>

@@ -1,0 +1,71 @@
+---
+// src/components/layouts/NavLink.astro
+const { lang } = Astro.props;
+
+const translations = {
+	es: {
+		services: { label: 'Servicios', path: 'services' },
+		aboutUs: { label: 'Sobre Nosotros', path: 'about-us' },
+		portfolio: { label: 'Portafolio', path: 'portfolio' },
+		gallery: { label: 'Galeria', path: 'gallery' },
+		blog: { label: 'Blog', path: 'blog' },
+		testimonies: { label: 'Testimonios', path: 'testimonies' },
+		contact: { label: 'Contacto', path: 'contact' },
+	},
+	en: {
+		services: { label: 'Services', path: 'services' },
+		aboutUs: { label: 'About Us', path: 'about-us' },
+		portfolio: { label: 'Portfolio', path: 'portfolio' },
+		gallery: { label: 'Gallery', path: 'gallery' },
+		blog: { label: 'Blog', path: 'blog' },
+		testimonies: { label: 'Testimonies', path: 'testimonies' },
+		contact: { label: 'Contact', path: 'contact' },
+	},
+};
+
+const t = translations[lang];
+
+const links = [
+	{ path: t.services.path, label: t.services.label },
+	{ path: t.aboutUs.path, label: t.aboutUs.label },
+	{ path: t.portfolio.path, label: t.portfolio.label },
+	{ path: t.gallery.path, label: t.gallery.label },
+	{ path: t.blog.path, label: t.blog.label },
+	{ path: t.testimonies.path, label: t.testimonies.label },
+	{ path: t.contact.path, label: t.contact.label },
+];
+---
+
+{
+	links.map((link) => (
+		<li>
+			<a href={`/${lang}/${link.path}`} class="nav-link xl:hidden">
+				{link.label}
+			</a>
+		</li>
+	))
+}
+
+<style>
+	/* ========================= */
+	/*           Hover           */
+	/* ========================= */
+	.nav-link {
+		/* display: inline;		 */
+		font-family: var(--font-main);
+		color: var(--color-secondary);
+		font-size: 1.2rem;
+		line-height: 1.2;
+		border-radius: 0.25rem;
+		padding: 0.5rem;
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+	}
+
+	.nav-link:hover {
+		/* display: inline-block; */
+		background-color: var(--color-neutral-600);
+		color: white;
+	}
+</style>

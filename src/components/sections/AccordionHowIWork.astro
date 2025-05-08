@@ -1,0 +1,82 @@
+---
+// src/components/sections/AccordionHowIWork.astro
+
+// ----- Function
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+const { lang = 'es' } = Astro.params;
+
+const translations = {
+	es: {
+		heading: '¿Cómo trabajo?',
+		blocks: [
+			{
+				title: '1. Primera reunión / Briefing',
+				paragraph: 'Escucho tus ideas, necesidades y estilo de vida.',
+			},
+			{
+				title: '2. Propuesta personalizada',
+				paragraph: 'Desarrollo una propuesta con soluciones estéticas y funcionales.',
+			},
+			{
+				title: '3. Revisión y ajustes',
+				paragraph: 'Afinamos los detalles hasta que se sienta completamente tuyo.',
+			},
+			{
+				title: '4. Entrega final',
+				paragraph:
+					'Te entrego todo lo necesario para que puedas llevarlo a cabo o coordino su implementación.',
+			},
+		],
+	},
+	en: {
+		heading: 'How do I work?',
+		blocks: [
+			{
+				title: '1. First meeting / Briefing',
+				paragraph: 'I listen to your ideas, needs, and lifestyle.',
+			},
+			{
+				title: '2. Customized proposal',
+				paragraph: 'I develop a proposal with aesthetic and functional solutions.',
+			},
+			{
+				title: '3. Review and adjustments',
+				paragraph: 'We fine-tune the details until it feels completely yours.',
+			},
+			{
+				title: '4. Final delivery',
+				paragraph:
+					'I provide you with everything you need to carry it out or I coordinate its implementation.',
+			},
+		],
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius relative mx-auto flex w-full cursor-pointer items-center justify-center p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.heading}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 border-2 p-6 text-left">
+		{
+			t.blocks.map((block, index) => (
+				<details key={index} class="group border-accent radius border-b py-4">
+					<summary class="group-open:text-primary cursor-pointer font-medium transition-all">
+						{block.title}
+					</summary>
+					<p class="mt-2">{block.paragraph}</p>
+				</details>
+			))
+		}
+	</div>
+</details>

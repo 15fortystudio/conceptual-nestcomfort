@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+
+@import '@fontsource/lato';
+@import '@fontsource-variable/playfair-display';
+
+@theme {
+	/* Fonts */
+	--font-header: 'Playfair Display';
+	--font-main: 'Lato';
+
+	/* Font color */
+	--color-primary: #6b5f51;
+	--color-secondary: #3a3a3a;
+	--color-link: #8a8e61;
+	--color-detail: #d8d5cd;
+
+	/* Colors */
+	--color-background: #e9ddcc;
+	--color-accent: #f5f2ec;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--font-header);
+	color: var(--color-primary);
+	line-height: 1;
+}
+
+h1 {
+	font-size: clamp(3rem, 4vw, 6rem);
+	font-weight: 600;
+}
+
+h2 {
+	font-size: clamp(2rem, 2vw, 3rem);
+	font-weight: 500;
+	color: var(--color-link);
+}
+
+h3 {
+	font-size: clamp(1.5rem, 2vw, 2rem);
+	font-weight: 400;
+}
+
+p,
+.p-white,
+.p-fixed {
+	font-family: var(--font-main);
+	line-height: 1.2;
+}
+
+p,
+.p-white {
+	font-size: clamp(1.125rem, 2vw, 1.5rem);
+}
+
+p,
+.p-fixed {
+	color: var(--color-secondary);
+}
+
+.p-white {
+	color: var(--color-neutral-300);
+}
+.p-fixed {
+	font-size: 1rem;
+}
+
+.leading {
+	font-size: 0.75rem;
+	color: var(--color-neutral-500);
+}
+
+.logo {
+	font-family: var(--font-header);
+	color: var(--color-secondary);
+	font-size: 32px;
+	font-weight: 800;
+}
+
+.radius {
+	border-radius: 0.25rem;
+}
+
+.link {
+	font-size: 1.2rem;
+	line-height: 1;
+	font-weight: 400;
+}
+
+.whiteShadow {
+	text-shadow: 1px 2px 0 #ffffff;
+}
+
+.responsive {
+	@apply mx-auto w-[95%] sm:w-[90%] md:w-[85%] lg:w-[80%] xl:w-[75%];
+}

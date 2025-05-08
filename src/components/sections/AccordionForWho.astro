@@ -1,0 +1,43 @@
+---
+// src/components/sections/AccordionForWho.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title: '¿Para quién es este servicio?',
+		paragraph01:
+			'Para personas que desean que su hogar refleje quiénes son y cómo quieren sentirse.',
+		paragraph02:
+			'Mis clientes valoran el bienestar, el diseño con sentido y buscan una experiencia profesional, pero cercana y humana.',
+		paragraph03:
+			'Llegan con dudas, con un espacio que no los convence, o simplemente con ganas de un cambio auténtico.',
+	},
+	en: {
+		title: 'Who is this service for?',
+		paragraph01:
+			'For people who want their home to reflect who they are and how they want to feel.',
+		paragraph02:
+			'My clients value well-being, meaningful design, and seek a professional yet warm and human experience.',
+		paragraph03:
+			"They come with questions, with a space they're not happy with, or simply wanting a real change.",
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.title}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<p>{t.paragraph01}</p>
+		<p>{t.paragraph02}</p>
+		<p>{t.paragraph03}</p>
+	</div>
+</details>

@@ -1,0 +1,36 @@
+---
+// src/components/Experience.astro
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title: 'Diseño con intención, experiencia y cercanía',
+		paragraph:
+			'Nos apasiona transformar espacios en refugios personales, donde el diseño no solo embellece, sino que también aporta calma, funcionalidad y bienestar. Cada proyecto que tomamos refleja nuestra experiencia, sensibilidad y compromiso con un acompañamiento cercano.',
+		text01: '+ 30 espacios asesorados',
+		text02: 'Diseño enfocado en bienestar',
+		text03: 'Atención 100% personalizada',
+	},
+	en: {
+		title: 'Design with intention, experience, and warmth',
+		paragraph:
+			'We are passionate about transforming spaces into personal sanctuaries, where design not only beautifies but also brings calm, functionality, and well-being. Every project we take on reflects our experience, sensitivity, and commitment to a close and personalized approach.',
+		text01: '+ 30 spaces advised',
+		text02: 'Design focused on well-being',
+		text03: '100% personalized attention',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<section class="flex flex-col gap-12 p-10 text-center responsive">
+	<span class="sr-only">Experience</span>
+	<h2>{t.title}</h2>
+	<p class="text-secondary">{t.paragraph}</p>
+	<div class="flex justify-around gap-8 xl:gap-16">
+		<span class="border-primary text-secondary border-y-2 py-4 text-xl">{t.text01}</span>
+		<span class="border-primary text-secondary border-y-2 py-4 text-xl">{t.text02}</span>
+		<span class="border-primary text-secondary border-y-2 py-4 text-xl">{t.text03}</span>
+	</div>
+</section>

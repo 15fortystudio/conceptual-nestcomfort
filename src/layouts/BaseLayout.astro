@@ -1,0 +1,20 @@
+---
+// src/layouts/BaseLayout.astro
+import '../styles/global.css';
+import BaseHead from '../components/layouts/BaseHead.astro';
+import Header from '../components/layouts/Header.astro';
+import Footer from '../components/layouts/Footer.astro';
+
+const { lang = 'es' } = Astro.props;
+---
+
+<html lang={lang}>
+	<BaseHead lang={lang} />
+	<body class="bg-background flex flex-col gap-4">
+		<Header lang={lang} />
+		<main class="flex flex-col gap-8 sm:gap-10 md:gap-14 lg:gap-20 xl:gap-28">
+			<slot />
+		</main>
+		<Footer lang={lang} />
+	</body>
+</html>

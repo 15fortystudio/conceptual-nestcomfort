@@ -1,0 +1,110 @@
+---
+// src/pages/[lang]/blog/page/[page].astro
+
+// ----- COMPONENTS
+
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Banner from '../../../../components/sections/Banner.astro';
+import CallToAction from '../../../../components/sections/CallToAction.astro';
+import BlogCard from '../../../../components/ui/BlogCard.astro';
+import Pagination from '../../../../components/ui/Pagination.astro';
+
+// ----- IMAGE
+
+import BlogBanner from '../../../../assets/images/bg/bg-testimonies.webp';
+import CTA from '../../../../assets/images/cta.webp';
+
+import { type CollectionEntry } from 'astro:content';
+
+// ----- FUNCTION
+
+// Parámetros de ruta
+const { page = '1', lang = 'es' } = Astro.params;
+const currentPage: number = typeof page === 'string' ? parseInt(page, 10) : 1;
+
+// Cargar posts desde content/posts/
+const postsImport = import.meta.glob('../../../../content/posts/*.mdx');
+const postEntries = Object.entries(postsImport);
+
+// Tipar los módulos como CollectionEntry<'posts'>
+const loadedPosts = await Promise.all(
+	postEntries.map(([, loader]) => loader() as Promise<CollectionEntry<'posts'>>)
+);
+
+// Extraer frontmatter y ordenar por fecha descendente
+const posts = loadedPosts
+	.map((mod) => mod.frontmatter)
+	.filter((post) => post.lang === lang)
+	.sort((a, b) => {
+		const dateA = new Date(a.date).getTime();
+		const dateB = new Date(b.date).getTime();
+		return dateB - dateA;
+	});
+
+// Paginación
+const itemsPerPage = 6;
+const totalPages = Math.ceil(posts.length / itemsPerPage);
+const start = (currentPage - 1) * itemsPerPage;
+const end = start + itemsPerPage;
+const postsToShow = posts.slice(start, end);
+
+const translations: Record<string, { title: string; intro: string }> = {
+	es: {
+		title: 'Nuestro Blog',
+		intro:
+			'Bienvenido a nuestro espacio de ideas, consejos e inspiración. Descubre artículos pensados para acompañarte en cada etapa de tu camino. ¡Esperamos que disfrutes la lectura!',
+	},
+	en: {
+		title: 'Our Blog',
+		intro:
+			'Welcome to our space of ideas, advice, and inspiration. Discover articles designed to support you in every stage of your journey. We hope you enjoy reading!',
+	},
+};
+
+// Generar rutas estáticas
+export async function getStaticPaths() {
+	const postsImport = import.meta.glob('../../../../content/posts/*.mdx');
+	const totalPages = Math.ceil(Object.keys(postsImport).length / 6);
+
+	const paths = [];
+	for (let p = 1; p <= totalPages; p++) {
+		paths.push({ params: { lang: 'es', page: p.toString() } });
+		paths.push({ params: { lang: 'en', page: p.toString() } });
+	}
+
+	return paths;
+}
+
+const t = translations[lang] ?? translations['es'];
+// console.log(posts);
+---
+
+<BaseLayout lang={lang}>
+	<Banner imageSrc={BlogBanner} key="blog" lang={lang} />
+
+	<section class="flex flex-col gap-8 px-[5%]">
+		<h2 class="text-secondary text-center">{t.title}</h2>
+		<p class="text-center">{t.intro}</p>
+
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			{
+				postsToShow.map((post) => (
+					<BlogCard
+						title={post.title}
+						image={post.image}
+						date={new Date(post.date).toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})}
+						slug={post.slug}
+					/>
+				))
+			}
+		</div>
+
+		<Pagination currentPage={currentPage} totalPages={totalPages} lang={lang} basePath="blog" />
+	</section>
+
+	<CallToAction lang={lang} imageSrc={CTA} />
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+// src/components/section/AccordionAbout.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		heading: 'Nuesto equipo',
+		paragraph:
+			'En Nest Comfort, cada integrante aporta su visión, talento y pasión para transformar espacios en refugios que inspiran. ',
+		paragraph02: '',
+	},
+	en: {},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<div>
+	<h2 class="w-full text-center text-xl font-bold">{t.heading}</h2>
+
+	<div class="radius -mt-2 flex flex-col gap-4 p-6 text-left">
+		<p>{t.paragraph}</p>
+	</div>
+</div>

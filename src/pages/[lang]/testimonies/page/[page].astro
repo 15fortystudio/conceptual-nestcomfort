@@ -1,0 +1,98 @@
+---
+// src/pages/[lang]/testimonies/page/[page].astro
+
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Banner from '../../../../components/sections/Banner.astro';
+import TestimoniesBanner from '../../../../assets/images/bg/bg-testimonies.webp';
+import CallToAction from '../../../../components/sections/CallToAction.astro';
+import CTA from '../../../../assets/images/cta.webp';
+import TestimonyCard from '../../../../components/ui/TestimonyCard.astro';
+import Pagination from '../../../../components/ui/Pagination.astro';
+
+// Parámetros de ruta
+const { page = '1', lang = 'es' } = Astro.params;
+const currentPage = parseInt(page);
+
+// Cargar testimoniess desde content/testimoniess/
+const testimoniesImport = import.meta.glob('../../../../content/testimonies/*.mdx');
+const testimoniesEntries = Object.entries(testimoniesImport);
+const loadedtestimonies = await Promise.all(testimoniesEntries.map(([_, loader]) => loader()));
+
+// Extraer frontmatter y ordenar por fecha descendente
+const testimonies = loadedtestimonies
+	.map((mod) => mod.frontmatter)
+	.filter((testimonies) => testimonies.lang === lang)
+	.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+// Paginación
+const itemsPerPage = 6;
+const totalPages = Math.ceil(testimonies.length / itemsPerPage);
+const start = (currentPage - 1) * itemsPerPage;
+const end = start + itemsPerPage;
+const testimoniesToShow = testimonies.slice(start, end);
+
+// Generar rutas estáticas
+export async function getStaticPaths() {
+	const testimoniesImport = import.meta.glob('../../../../content/testimonies/*.mdx');
+	const totalPages = Math.ceil(Object.keys(testimoniesImport).length / 6);
+
+	const paths = [];
+	for (let p = 1; p <= totalPages; p++) {
+		paths.push({ params: { lang: 'es', page: p.toString() } });
+		paths.push({ params: { lang: 'en', page: p.toString() } });
+	}
+
+	return paths;
+}
+
+// Traducciones directamente en el componente
+const translations = {
+	es: {
+		paragraph:
+			'La confianza y satisfacción de quienes han trabajado con nosotros son nuestro mayor orgullo.	Conoce algunas de sus experiencias y descubre por qué somos la elección correcta para tu proyecto.',
+	},
+	en: {
+		paragraph:
+			'The trust and satisfaction of those who have worked with us are our greatest pride. Learn about some of their experiences and discover why we are the right choice for your project.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+
+// console.log(testimonies);
+---
+
+<BaseLayout lang={lang}>
+	<Banner imageSrc={TestimoniesBanner} key="testimonies" lang={lang} />
+	<section class="responsive flex flex-col gap-8">
+		<h2 class="text-secondary text-center">Testimonios</h2>
+		<p class="text-center">{t.paragraph}</p>
+
+		<div class="mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+			{
+				testimoniesToShow.map((testimonies) => (
+					<TestimonyCard
+						author={testimonies.author}
+						image={testimonies.image}
+						testimony={testimonies.testimony}
+						stars={testimonies.stars}
+						date={new Date(testimonies.date).toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})}
+						slug={testimonies.slug}
+					/>
+				))
+			}
+		</div>
+
+		<Pagination
+			currentPage={currentPage}
+			totalPages={totalPages}
+			lang={lang}
+			basePath="testimonies"
+		/>
+	</section>
+	<CallToAction lang={lang} imageSrc={CTA} />
+</BaseLayout>

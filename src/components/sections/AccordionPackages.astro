@@ -1,0 +1,82 @@
+---
+// src/components/sections/AccordionPackages.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title: 'Paquetes y precios',
+		paragraph01: 'Los precios varían según el tipo de servicio. Aquí te doy una idea:',
+		subTitle01: 'Asesoría:',
+		paragraph02: 'Precio fijo por hora',
+		subTitle02: 'Rediseño:',
+		paragraph03: 'Depende del número de espacios',
+		subTitle03: 'Diseño completo:',
+		paragraph04: 'Cotización personalizada (te muestro rangos y qué incluye cada etapa)',
+		paragraph05: 'Estoy estructurando paquetes que se adapten a tus necesidades:',
+		subTitle04: 'Básico:',
+		paragraph06: 'Solo propuesta',
+		subTitle05: 'Intermedio:',
+		paragraph07: 'Propuesta + compras',
+		subTitle06: 'Completo:',
+		paragraph08: 'Todo incluido (excepto ejecución)',
+	},
+	en: {
+		title: 'Packages and Pricing',
+		paragraph01: 'Prices vary depending on the type of service. Here’s a quick overview:',
+		subTitle01: 'Consultation:',
+		paragraph02: 'Fixed hourly rate',
+		subTitle02: 'Redesign:',
+		paragraph03: 'Depends on the number of spaces',
+		subTitle03: 'Full Design:',
+		paragraph04: 'Custom quote (I’ll show you price ranges and what each stage includes)',
+		paragraph05: 'I’m structuring packages to fit your needs:',
+		subTitle04: 'Basic:',
+		paragraph06: 'Design proposal only',
+		subTitle05: 'Intermediate:',
+		paragraph07: 'Proposal + shopping list',
+		subTitle06: 'Complete:',
+		paragraph08: 'All-inclusive (except execution)',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.title}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<p>{t.paragraph01}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
+			<summary class="text-secondary text-base">{t.subTitle01}</summary>
+			<p>{t.paragraph02}</p>
+		</details>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
+			<summary class="text-secondary text-base">{t.subTitle02}</summary>
+			<p>{t.paragraph03}</p>
+		</details>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
+			<summary class="text-secondary text-base">{t.subTitle03}</summary>
+			<p>{t.paragraph04}</p>
+		</details>
+		<p>{t.paragraph05}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
+			<summary class="text-secondary text-base">{t.subTitle04} </summary>
+			<p>{t.paragraph06}</p>
+		</details>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
+			<summary class="text-secondary text-base">{t.subTitle05} </summary>
+			<p>{t.paragraph07}</p>
+		</details>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
+			<summary class="text-secondary text-base">{t.subTitle06} </summary>
+			<p>{t.paragraph08}</p>
+		</details>
+	</div>
+</details>

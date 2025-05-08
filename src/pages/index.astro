@@ -1,0 +1,35 @@
+---
+// src/pages/index.astro
+
+// ----- Function
+
+const { lang = 'es' } = Astro.params;
+
+const translations = {
+	es: {
+		title: 'Redireccionando...',
+		paragraph: 'Redireccionando a idioma...',
+	},
+	en: {
+		title: 'Redirecting...',
+		paragraph: 'Redirecting to language...',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<title>{t.title}</title>
+		<script>
+			const userLang = navigator.language;
+			const langPrefix = userLang.startsWith('es') ? 'es' : 'en';
+			window.location.replace('/' + langPrefix + '/');
+		</script>
+	</head>
+	<body>
+		<p>{t.paragraph}</p>
+	</body>
+</html>

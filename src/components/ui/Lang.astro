@@ -1,0 +1,26 @@
+---
+// src/components/ui/Lang.astro
+
+const { lang = 'es' } = Astro.props;
+
+// Definir las traducciones aquí
+const translations = {
+	es: {
+		language01: 'Español',
+		language02: 'Inglés',
+		// Agrega más claves si es necesario
+	},
+	en: {
+		language01: 'Spanish',
+		language02: 'English',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<div class="link">
+	<a href="/es/">{t.language01}</a>
+	<span>|</span>
+	<a href="/en/">{t.language02}</a>
+</div>

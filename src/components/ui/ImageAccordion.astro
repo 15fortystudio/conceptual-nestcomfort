@@ -1,0 +1,363 @@
+---
+// src/components/ImageAccordion.astro
+
+import { Picture } from 'astro:assets';
+const { lang = 'es', imageSrc01, imageSrc02, service } = Astro.props;
+
+// Traducciones
+const translations = {
+	es: {
+		warning: 'No hay contenido disponible',
+		residential: {
+			title: 'Diseño Interior Residencial',
+			paragraph:
+				'Un servicio integral pensado para transformar tu hogar desde cero, cuidando cada detalle. Ideal si estás por mudarte, remodelar completamente o quieres crear un nuevo espacio que refleje tu estilo de vida y bienestar.',
+			alt01:
+				'Moderna sala de estar con un sofá blanco, una mesa de café negra, detalles tejidos y un comedor visible a través de una puerta abierta.',
+			alt02:
+				'Moderna sala de estar con un sofá gris, paredes con detalles en negro, arte abstracto, una mesa de café redonda y grandes ventanales que ofrecen una vista de la vegetación.',
+			title01: 'Características',
+			content01: [
+				'Diseño personalizado',
+				'Moodboard inspiracional',
+				'Plano de distribución funcional',
+				'Lista de compras detallada',
+				'Asesoría en selección de materiales y acabados',
+			],
+			title02: 'Beneficios',
+			content02: [
+				'Armonía en cada rincón',
+				'Funcionalidad adaptada a tu rutina',
+				'Bienestar emocional y visual',
+				'Belleza consciente, sin excesos',
+			],
+			title03: 'Diferencial',
+			content03a: 'Cada propuesta nace de la historia de quien habita el espacio.',
+			content03b: 'No diseño casas, diseño refugios con alma.',
+			title04: '¿Qué incluye?',
+			content04: [
+				'Briefing inicial y diagnóstico del espacio',
+				'Desarrollo de un concepto de diseño a medida',
+				'Paleta de colores, materiales y acabados',
+				'Propuesta de distribución espacial y mobiliario',
+				'Moodboard visual y referencias estéticas',
+				'Lista de compras sugerida y recomendaciones',
+				'Contacto con proveedores confiables (si se requiere)',
+				'Acompañamiento durante todo el proceso creativo',
+			],
+			title05: '¿Para quién es?',
+			content05a:
+				'Para personas que desean una transformación profunda de su hogar, ya sea un solo espacio o la casa completa.',
+			content05b:
+				'Ideal para quienes buscan un diseño pensado en su día a día, su historia y su forma de habitar.',
+		},
+		interior: {
+			title: 'Asesoría en Diseño Interior',
+			paragraph:
+				'Un encuentro de 1 a 2 horas donde resolvemos dudas, orientamos decisiones y definimos un rumbo claro para tu espacio. Perfecto si ya tienes ideas, pero necesitas ayuda profesional para concretarlas.',
+			alt01:
+				'Una pareja sentada sobre una alfombra, revisando un plano digital en una tableta, rodeada de paletas de colores y materiales de diseño.',
+			alt02:
+				'Dos mujeres conversan alrededor de una mesa llena de papeles, una computadora portátil y tazas de café, en una habitación elegante y llena de plantas.',
+			title01: 'Características',
+			content01: [
+				'Sesión virtual o presencial',
+				'Análisis funcional y estético del espacio',
+				'Consejos puntuales y aplicables',
+			],
+			title02: 'Beneficios',
+			content02: [
+				'Claridad para tomar decisiones',
+				'Dirección concreta en tu proceso de diseño',
+				'Ahorro de errores, tiempo y dinero',
+			],
+			title03: 'Diferencial',
+			content03a: 'Me enfoco en entender la necesidad real detrás de cada pregunta.',
+			content03b: 'Cada recomendación nace de escuchar con atención.',
+			title04: '¿Qué incluye?',
+			content04: [
+				'Reunión de 1 a 2 horas (virtual o presencial)',
+				'Análisis del espacio y tus necesidades específicas',
+				'Sugerencias de distribución, mobiliario, color y estilo',
+				'Consejos prácticos y recomendaciones inmediatas',
+				'Envío de resumen con los puntos clave de la asesoría',
+			],
+			title05: '¿Para quién es?',
+			content05a:
+				'Para quienes están comenzando un proyecto, necesitan una segunda opinión, o buscan optimizar su espacio sin hacer una renovación completa.',
+			content05b:
+				'También es ideal si tienes dudas específicas o necesitas resolver un problema puntual en tu hogar.',
+		},
+		space: {
+			title: 'Rediseño y Renovación de Espacios',
+			paragraph:
+				'Un servicio flexible para transformar un espacio que ya existe, manteniendo parte de lo que tienes pero dándole nueva vida. A veces, solo hace falta una mirada fresca para que todo cambie.',
+			alt01:
+				'Moderna sala de estar con una pared con acento gris, muebles elegantes, un centro de mesa floral y grandes ventanas que invitan a la luz natural.',
+			alt02:
+				'Un diseñador dibuja un plano de planta sobre una mesa repleta de muestras de tela, muestras de color y dibujos arquitectónicos.',
+			title01: 'Características',
+			content01: [
+				'Reutilización de elementos existentes',
+				'Reconfiguración espacial funcional',
+				'Toques estratégicos de color, mobiliario y estilo',
+			],
+			title02: 'Beneficios',
+			content02: [
+				'Un nuevo aire sin necesidad de obras mayores',
+				'Optimización de lo que ya tienes',
+				'Renovación accesible y efectiva',
+			],
+			title03: 'Diferencial',
+			content03a: 'Diseño consciente, accesible y transformador.',
+			content03b: 'No siempre se trata de empezar de cero, sino de mirar con otros ojos.',
+			title04: '¿Qué incluye?',
+			content04: [
+				'Diagnóstico del espacio actual',
+				'Propuesta de rediseño funcional y estético',
+				'Cambios clave en color, distribución y mobiliario',
+				'Lista de compras con recomendaciones prácticas',
+				'Posibilidad de integrar y adaptar piezas existentes',
+			],
+			title05: '¿Para quién es?',
+			content05a:
+				'Para quienes no se sienten cómodos con su espacio actual, pero no quieren (o no pueden) partir desde cero.',
+			content05b:
+				'Ideal si deseas una renovación significativa sin necesidad de grandes obras o inversiones.',
+		},
+	},
+	en: {
+		warning: 'No content available',
+		residential: {
+			title: 'Residential Interior Design',
+			paragraph:
+				'A comprehensive service designed to transform your home from scratch, taking care of every detail. Ideal if you are moving, planning a full renovation, or want to create a new space that reflects your lifestyle and well-being.',
+			alt01:
+				'Modern living room with a white sofa, a black coffee table, woven details, and a dining area visible through an open door.',
+			alt02:
+				'Modern living room with a gray sofa, black accent walls, abstract art, a round coffee table, and large windows offering a view of the greenery.',
+			title01: 'Features',
+			content01: [
+				'Customized design',
+				'Inspirational moodboard',
+				'Functional layout plan',
+				'Detailed shopping list',
+				'Assistance in selecting materials and finishes',
+			],
+			title02: 'Benefits',
+			content02: [
+				'Harmony in every corner',
+				'Functionality tailored to your routine',
+				'Emotional and visual well-being',
+				'Conscious beauty, without excess',
+			],
+			title03: 'Differentiator',
+			content03a: 'Each proposal is born from the story of the one who inhabits the space.',
+			content03b: 'I do not design houses; I design soulful sanctuaries.',
+			title04: 'What’s included?',
+			content04: [
+				'Initial briefing and space diagnosis',
+				'Development of a tailored design concept',
+				'Color palette, materials, and finishes selection',
+				'Space layout and furniture proposal',
+				'Visual moodboard and aesthetic references',
+				'Suggested shopping list and recommendations',
+				'Contact with trusted suppliers (if needed)',
+				'Support throughout the creative process',
+			],
+			title05: 'Who is it for?',
+			content05a:
+				'For those who seek a deep transformation of their home, whether a single room or the entire house.',
+			content05b:
+				'Ideal for people looking for a design crafted around their daily life, personal story, and way of living.',
+		},
+		interior: {
+			title: 'Interior Design Consultation',
+			paragraph:
+				'A 1 to 2-hour meeting where we solve doubts, guide decisions, and define a clear direction for your space. Perfect if you already have ideas but need professional help to bring them to life.',
+			alt01:
+				'A couple sitting on a rug, reviewing a digital plan on a tablet, surrounded by color palettes and design materials.',
+			alt02:
+				'Two women chat around a table covered in papers, a laptop, and coffee cups in an elegant, plant-filled room.',
+			title01: 'Features',
+			content01: [
+				'Virtual or in-person session',
+				'Functional and aesthetic space analysis',
+				'Actionable and practical advice',
+			],
+			title02: 'Benefits',
+			content02: [
+				'Clarity to make decisions',
+				'Concrete direction for your design process',
+				'Saves you from mistakes, saving time and money',
+			],
+			title03: 'Differentiator',
+			content03a: 'I focus on understanding the real need behind every question.',
+			content03b: 'Each recommendation is based on attentive listening.',
+			title04: 'What’s included?',
+			content04: [
+				'1 to 2-hour meeting (virtual or in-person)',
+				'Space analysis and identification of specific needs',
+				'Suggestions for layout, furniture, color, and style',
+				'Practical advice and immediate recommendations',
+				'Summary of key points from the consultation',
+			],
+			title05: 'Who is it for?',
+			content05a:
+				'For those starting a project, needing a second opinion, or looking to optimize their space without a full renovation.',
+			content05b:
+				'Also ideal if you have specific doubts or need to solve a particular problem at home.',
+		},
+		space: {
+			title: 'Space Redesign and Renovation',
+			paragraph:
+				'A flexible service to transform an existing space, keeping parts of what you already have but breathing new life into it. Sometimes, all it takes is a fresh perspective to make everything change.',
+			alt01:
+				'Modern living room with a gray accent wall, elegant furniture, a floral centerpiece, and large windows that invite natural light.',
+			alt02:
+				'A designer sketches a floor plan on a table cluttered with fabric swatches, color samples, and architectural drawings.',
+			title01: 'Features',
+			content01: [
+				'Reuse of existing elements',
+				'Functional space reconfiguration',
+				'Strategic touches of color, furniture, and style',
+			],
+			title02: 'Benefits',
+			content02: [
+				'A fresh look without major construction',
+				'Optimizing what you already have',
+				'Accessible and effective renovation',
+			],
+			title03: 'Differentiator',
+			content03a: 'Conscious, accessible, and transformative design.',
+			content03b:
+				'It’s not always about starting from scratch, but about seeing things with new eyes.',
+			title04: 'What’s included?',
+			content04: [
+				'Space diagnosis and analysis',
+				'Proposed redesign for functionality and aesthetics',
+				'Key changes in color, layout, and furniture',
+				'Practical shopping list with recommendations',
+				'Option to integrate and adapt existing pieces',
+			],
+			title05: 'Who is it for?',
+			content05a:
+				'For those who are dissatisfied with their current space but don’t want (or can’t) start from scratch.',
+			content05b:
+				'Ideal if you want a significant renovation without major construction or investments.',
+		},
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<article class="flex flex-col gap-20">
+	<div class="flex flex-col items-stretch gap-8 md:flex-row-reverse">
+		<figure class="shadow-2xl lg:w-1/2">
+			<Picture
+				src={imageSrc01}
+				alt={t[service].alt01 || 'Default alt text'}
+				class="radius h-full w-full object-cover shadow-2xl"
+			/>
+			<figcaption class="sr-only">{t[service].alt01 || 'Default alt text'}</figcaption>
+		</figure>
+		<div class="flex flex-col gap-8 lg:w-1/2">
+			<div class="flex flex-col justify-center gap-8">
+				<h2 class="text-center">{t[service].title}</h2>
+				<p>{t[service].paragraph}</p>
+			</div>
+
+			<details open class="shadow-2xl">
+				<summary
+					class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+				>
+					<h3 class="w-full text-center text-xl font-bold">{t[service].title01}</h3>
+					<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+				</summary>
+
+				<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+					<ul
+						class="text-secondary line-inside p-fixed flex list-disc flex-col gap-2 space-y-1 px-4 text-left"
+					>
+						{t[service].content01.map((cont) => <li>{cont}</li>)}
+					</ul>
+				</div>
+			</details>
+
+			<details open class="shadow-2xl">
+				<summary
+					class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+				>
+					<h3 class="w-full text-center text-xl font-bold">{t[service].title02}</h3>
+					<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+				</summary>
+
+				<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+					<ul
+						class="text-secondary line-inside p-fixed flex list-disc flex-col gap-2 space-y-1 px-4 text-left"
+					>
+						{t[service].content02.map((cont) => <li>{cont}</li>)}
+					</ul>
+				</div>
+			</details>
+		</div>
+	</div>
+
+	<div class="flex flex-col items-stretch gap-8 md:flex-row">
+		<figure class="shadow-2xl lg:w-1/2">
+			<Picture
+				src={imageSrc02}
+				alt={t[service].alt02 || 'Default alt text'}
+				class="radius h-full w-full object-cover shadow-2xl"
+			/>
+			<figcaption class="sr-only">{t[service].alt02 || 'Default alt text'}</figcaption>
+		</figure>
+
+		<div class="flex flex-col gap-8 lg:w-1/2">
+			<details open class="shadow-2xl">
+				<summary
+					class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+				>
+					<h3 class="w-full text-center text-xl font-bold">{t[service].title03}</h3>
+					<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+				</summary>
+				<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+					<span class="p-fixed">{t[service].content03a}</span>
+					<span class="p-fixed">{t[service].content03b}</span>
+				</div>
+			</details>
+
+			<details open class="shadow-2xl">
+				<summary
+					class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+				>
+					<h3 class="w-full text-center text-xl font-bold">{t[service].title04}</h3>
+					<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+				</summary>
+
+				<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+					<ul
+						class="text-secondary line-inside p-fixed flex list-disc flex-col gap-2 space-y-1 px-4 text-left"
+					>
+						{t[service].content04.map((cont) => <li>{cont}</li>)}
+					</ul>
+				</div>
+			</details>
+
+			<details open class="shadow-2xl">
+				<summary
+					class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+				>
+					<h3 class="w-full text-center text-xl font-bold">{t[service].title05}</h3>
+					<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+				</summary>
+
+				<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+					<span class="p-fixed">{t[service].content05a}</span>
+					<span class="p-fixed">{t[service].content05b}</span>
+				</div>
+			</details>
+		</div>
+	</div>
+</article>

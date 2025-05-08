@@ -1,0 +1,43 @@
+---
+// src/components/VirtualAdvice.astro
+import { Picture } from 'astro:assets';
+import Virtual from '../../assets/images/index/virtual.webp';
+import CustomButton from '../ui/CustomButton.astro';
+const { lang = 'es' } = Astro.props;
+
+// Traducciones directamente en el componente
+const translations = {
+	es: {
+		title: 'Asesoría Virtual de Interiorismo',
+		alt: 'Una colección de muestras de tela y muestras de pintura en varios colores, junto con acabados de madera texturizados sobre una superficie de madera clara.',
+		paragraph:
+			'Te acompaño a transformar tu espacio desde la comodidad de tu hogar. Juntas creamos un plan claro, funcional y alineado con tu estilo, para que tomes decisiones con confianza y sin complicaciones.',
+	},
+	en: {
+		title: 'Virtual Interior Design Consultation',
+		alt: 'A collection of fabric swatches and paint samples in various colors, along with textured wood finishes on a light wooden surface.',
+		paragraph:
+			'I help you transform your space from the comfort of your home. Together, we create a clear, functional plan aligned with your style, so you can make decisions with confidence and ease.',
+	},
+};
+
+const t = translations[lang];
+---
+
+<section class="relative w-full overflow-hidden">
+	<span class="sr-only">{t.title}</span>
+
+	<figure class="absolute inset-0 -z-10">
+		<Picture src={Virtual} alt={t.alt} class="h-full w-full object-cover" />
+		<figcaption class="sr-only">{t.alt}</figcaption>
+	</figure>
+
+	<!-- Overlay: oscurece ligeramente la imagen -->
+	<div class="absolute inset-0 -z-10 bg-black/70"></div>
+
+	<div class="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 px-4 py-20 text-center">
+		<h2 class="">{t.title}</h2>
+		<span class="text-lg text-neutral-300">{t.paragraph}</span>
+		<CustomButton lang={lang} key="virtual" />
+	</div>
+</section>

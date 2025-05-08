@@ -1,0 +1,38 @@
+---
+// src/components/section/AccordionDynamics.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		heading: 'Nuestra dinámica y liderazgo',
+		paragraph01:
+			'Soy la fundadora de Nest Comfort y lidero el equipo con una visión muy clara: ayudar a las personas a sentirse cómodas, felices y conectadas con sus espacios.',
+		paragraph02:
+			'Aunque cada quien tiene su rol, trabajamos de manera muy colaborativa, donde las ideas de todos son escuchadas. Además, ocasionalmente colaboramos con fotógrafos de interiores, artesanos y otros profesionales, a quienes también reconocemos cuando participan en proyectos destacados.',
+	},
+	en: {
+		heading: 'Our Dynamic and Leadership',
+		paragraph01:
+			'I’m the founder of Nest Comfort and I lead the team with a clear vision: to help people feel comfortable, happy, and connected to their spaces.',
+		paragraph02:
+			'While everyone has their own role, we work in a very collaborative way where everyone’s ideas are heard. We also occasionally collaborate with interior photographers, artisans, and other professionals, whom we acknowledge when they participate in standout projects.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.heading}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<p>{t.paragraph01}</p>
+		<p>{t.paragraph02}</p>
+	</div>
+</details>

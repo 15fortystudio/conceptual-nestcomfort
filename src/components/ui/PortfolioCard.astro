@@ -1,0 +1,33 @@
+---
+// src/components/ui/PortfolioCard.astro
+
+const { title, image, date, slug, lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		readMore: 'Leer más',
+	},
+	en: {
+		readMore: 'Read more',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<article class="flex flex-col gap-8">
+	<img
+		src={image}
+		alt={title}
+		class="radius h-[300px] w-full object-cover shadow-2xl"
+		loading="lazy"
+	/>
+
+	<div class="text-center">
+		<h3>{title}</h3>
+		<time datetime={date} class="leading">{date}</time>
+		<a href={`/${lang}/portfolio/${slug}`} class="text-primary mt-2 inline-block underline"
+			>{t.readMore}</a
+		>
+	</div>
+</article>

@@ -1,0 +1,105 @@
+---
+// src/components/Banner.astro
+import { Picture } from 'astro:assets';
+
+const { lang = 'es', imageSrc, key } = Astro.props;
+
+// Traducciones directamente en el componente
+const translations = {
+	es: {
+		index: {
+			title: 'Creamos espacios que reflejan tu esencia con calidez, armonía y equilibrio.',
+			alt: 'Elegante sala de estar con muebles modernos, un televisor grande e impresionantes vistas al mar enmarcadas por ventanas, con almohadas decorativas y obras de arte.',
+			paragraph:
+				'En Nest Comfort, el diseño de interiores se vive de forma natural, armoniosa y funcional. Aquí encontrarás una experiencia cálida y personalizada para transformar tu hogar.',
+		},
+		services: {
+			title: 'Servicios',
+			alt: '.',
+		},
+		about: {
+			title: 'Sobre Nosotros',
+			alt: '.',
+		},
+		portfolio: {
+			title: 'Portafolio',
+			alt: '.',
+		},
+		gallery: {
+			title: 'Galeria',
+			alt: '.',
+		},
+		blog: {
+			title: 'Blog',
+			alt: '.',
+		},
+		testimonies: {
+			title: 'Testimonios',
+			alt: '.',
+		},
+		contact: {
+			title: 'Contacto',
+			alt: '.',
+		},
+	},
+	en: {
+		index: {
+			title: 'We create spaces that reflect your essence with warmth, harmony, and balance.',
+			alt: 'Elegant living room with modern furniture, a large TV, and stunning ocean views framed by windows, with decorative pillows and artwork.',
+			paragraph:
+				'At Nest Comfort, interior design is experienced naturally, harmoniously, and functionally. Here you’ll find a warm, personalized experience to transform your home.',
+		},
+		services: {
+			title: 'Services',
+			alt: '.',
+		},
+		about: {
+			title: 'About us',
+			alt: '.',
+		},
+		portfolio: {
+			title: 'Portfolio',
+			alt: '.',
+		},
+		gallery: {
+			title: 'Gallery',
+			alt: '.',
+		},
+		blog: {
+			title: 'Blog',
+			alt: '.',
+		},
+		testimonies: {
+			title: 'Testimonies',
+			alt: '.',
+		},
+		contact: {
+			title: 'Contact',
+			alt: '.',
+		},
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+const hasParagraph = !!t[key].paragraph;
+---
+
+<section class="relative w-full overflow-hidden">
+	<span class="sr-only">Banner</span>
+
+	<figure class="absolute inset-0 -z-10 blur-xs">
+		<Picture src={imageSrc} alt={t[key].alt} class="h-full w-full object-cover" />
+
+		<figcaption class="sr-only">{t[key].alt}</figcaption>
+	</figure>
+
+	<div class="absolute inset-0 -z-10 bg-black/70"></div>
+
+	<div
+		class={`relative z-10 mx-auto flex max-w-[80%] flex-col py-[10%] text-center ${!hasParagraph ? 'justify-center gap-0' : 'gap-12'}`}
+	>
+		<h1 class="whiteShadow">{t[key].title}</h1>
+
+		{hasParagraph && <span class="p-white">{t[key].paragraph}</span>}
+	</div>
+</section>

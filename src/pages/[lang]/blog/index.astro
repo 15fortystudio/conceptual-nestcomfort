@@ -1,0 +1,32 @@
+---
+// src/pages/[lang]/blog/index.astro
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+const { lang = 'es' } = Astro.params;
+
+const translations = {
+	es: {
+		title: 'Redireccionando...',
+		paragraph: 'Redireccionando a la página de blog...',
+	},
+	en: {
+		title: 'Redirecting...',
+		paragraph: 'Redirecting to the blog page...',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<html lang={lang}>
+	<head>
+		<meta http-equiv="refresh" content={`0; url=/${lang}/blog/page/1`} />
+		<meta charset="UTF-8" />
+		<title>{t.title}</title>
+	</head>
+	<body>
+		<p>{t.paragraph}</p>
+	</body>
+</html>

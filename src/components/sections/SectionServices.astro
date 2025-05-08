@@ -1,0 +1,59 @@
+---
+// src/components/SectionServices.astro
+
+// ---------- COMPONENTS ----------
+
+import CustomButton from '../../components/ui/CustomButton.astro';
+import ServicesCard from '../../components/ui/ServicesCard.astro';
+
+// ---------- IMAGE ----------
+
+import ResidentialInteriorDesign from '../../assets/images/icons/interior-design.webp';
+import InteriorDesignConsulting from '../../assets/images/icons/creativity.webp';
+import RedesignRenovationSpaces from '../../assets/images/icons/remodeling.webp';
+
+// ---------- FUNCTION ----------
+
+const { lang = 'es' } = Astro.props;
+
+// Definir las traducciones aquí
+const translations = {
+	es: {
+		section: 'Seccion de servicios',
+		title: 'Diseño pensado para tu bienestar',
+		paragraph:
+			'Creamos espacios que se sienten tan bien como lucen. Ya sea que busques una renovación completa o una asesoría puntual, nuestros servicios están pensados para acompañarte con calidez, funcionalidad y un estilo que refleja tu esencia.',
+	},
+	en: {
+		section: 'Service section',
+		title: 'Design that feels as good as it looks',
+		paragraph:
+			"We create spaces that not only look beautiful but also feel right. Whether you're looking for a full transformation or a personalized consultation, our services are here to guide you with warmth, functionality, and a style that reflects your unique essence.",
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<section class="responsive flex flex-col gap-8">
+	<span class="sr-only">{t.section}</span>
+	<h2 class="text-center">Nuestros Servicios</h2>
+	<p class="text-center">
+		Ofrecemos soluciones personalizadas que combinan diseño, funcionalidad y estrategia digital.
+		Descubre cómo podemos ayudarte a hacer crecer tu proyecto con un sitio web profesional y
+		efectivo.
+	</p>
+	<div class="mx-4 flex flex-col gap-8 md:flex-row md:gap-4">
+		<div class="flex-1">
+			<ServicesCard lang={lang} Key={0} imageSrc={ResidentialInteriorDesign} />
+		</div>
+		<div class="flex-1">
+			<ServicesCard lang={lang} Key={1} imageSrc={InteriorDesignConsulting} />
+		</div>
+		<div class="flex-1">
+			<ServicesCard lang={lang} Key={2} imageSrc={RedesignRenovationSpaces} />
+		</div>
+	</div>
+
+	<CustomButton lang={lang} key="services" />
+</section>

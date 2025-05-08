@@ -1,0 +1,30 @@
+---
+// src/components/CustomButton.astro
+
+const { lang = 'es', key } = Astro.props;
+
+const translations = {
+	es: {
+		index: 'Empieza hoy mismo',
+		virtual: 'Más información',
+		services: 'Nuestros servicios',
+		portfolio: 'Inspírate con nuestro portafolio',
+		cta: 'Ellos ya confiaron en nosotros',
+	},
+	en: {
+		index: 'Start today',
+		virtual: 'Learn more',
+		services: 'Our services',
+		portfolio: 'Get inspired by our portfolio',
+		cta: 'They already trusted us',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<a
+	class="radius hover:bg-link mx-auto inline-block cursor-pointer bg-neutral-600 px-4 py-2 text-center shadow-lg hover:scale-105"
+>
+	<span class="link text-white">{t[key]}</span>
+</a>

@@ -1,0 +1,41 @@
+---
+// Props esperadas: currentPage, totalPages, lang, basePath
+const { currentPage, totalPages, lang = 'es', basePath } = Astro.props;
+
+const translations = {
+	es: {
+		page: 'Página',
+		of: 'de',
+		previous: 'Anterior',
+		next: 'Siguiente',
+	},
+	en: {
+		page: 'Page',
+		of: 'of',
+		previous: 'Previous',
+		next: 'Next',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<nav class="mt-8 flex items-center justify-center gap-6 text-center">
+	{
+		currentPage > 1 && (
+			<a href={`/${lang}/${basePath}/page/${currentPage - 1}`} class="text-primary hover:underline">
+				&lt; {t.previous}
+			</a>
+		)
+	}
+
+	<span class="text-muted">{t.page} {currentPage} {t.of} {totalPages}</span>
+
+	{
+		currentPage < totalPages && (
+			<a href={`/${lang}/${basePath}/page/${currentPage + 1}`} class="text-primary hover:underline">
+				{t.next} &gt;
+			</a>
+		)
+	}
+</nav>

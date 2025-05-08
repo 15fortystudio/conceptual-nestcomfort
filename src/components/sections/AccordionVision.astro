@@ -1,0 +1,38 @@
+---
+// src/components/section/AccordionVision.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		heading: 'Visión general del equipo',
+		paragraph01:
+			'Actualmente, nuestro equipo está conformado por cuatro personas. Somos un grupo muy unido, donde la colaboración fluye de forma natural y todos aportamos desde nuestras fortalezas. ',
+		paragraph02:
+			'Nos definen la pasión por el diseño bien pensado, el compromiso con la comodidad de nuestros clientes y la atención al detalle. Valoramos mucho la empatía, la estética y la funcionalidad.',
+	},
+	en: {
+		heading: 'Team Overview',
+		paragraph01:
+			'Our team currently consists of four people. We’re a close-knit group where collaboration flows naturally and each of us contributes from our strengths.',
+		paragraph02:
+			'We’re defined by our passion for thoughtful design, our commitment to client comfort, and our attention to detail. We deeply value empathy, aesthetics, and functionality.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.heading}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<p>{t.paragraph01}</p>
+		<p>{t.paragraph02}</p>
+	</div>
+</details>

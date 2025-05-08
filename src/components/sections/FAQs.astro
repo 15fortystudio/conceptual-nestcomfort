@@ -1,0 +1,68 @@
+---
+// src/components/FAQs.astro
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		paragraph: '¿Tienes dudas? Aquí te ayudamos a resolverlas',
+		q01: '¿Necesito tener todo definido antes de contactarles?',
+		a01: 'No es necesario. Justamente estamos aquí para ayudarte a ordenar ideas, entender tus necesidades y guiarte paso a paso para lograr el resultado que deseas.',
+		q02: '¿Trabajan con todo tipo de presupuestos?',
+		a02: 'Sí. Buscamos soluciones realistas y funcionales que se adapten a tus posibilidades, sin perder el enfoque estético ni la calidez que nos caracteriza.',
+		q03: '¿Qué incluye una asesoría virtual?',
+		a03: 'Incluye una sesión personalizada donde analizamos tu espacio, tus objetivos y estilo. Al finalizar, recibirás una guía clara con recomendaciones, referencias visuales y pasos a seguir.',
+		q04: '¿Puedo contratar solo una parte del proceso, como la selección de colores o mobiliario?',
+		a04: 'Por supuesto. Podemos ayudarte solo en la etapa que necesites, ya sea distribución, decoración, acabados o compras. Nos adaptamos a lo que realmente buscas.',
+		q05: '¿Cómo sé si este servicio es para mí?',
+		a05: 'Si quieres transformar tu espacio con intención, sin complicarte, y valoras una guía profesional y cercana, entonces este servicio es para ti.',
+	},
+	en: {
+		paragraph: 'Have questions? We’re here to help you solve them.',
+		q01: 'Do I need to have everything figured out before contacting you?',
+		a01: 'Not at all. We’re here to help you organize ideas, understand your needs, and guide you step by step to achieve the result you’re looking for.',
+		q02: 'Do you work with all types of budgets?',
+		a02: 'Yes. We aim to find realistic and functional solutions that fit your possibilities, without losing our signature warmth and aesthetic focus.',
+		q03: 'What does a virtual consultation include?',
+		a03: 'It includes a personalized session where we analyze your space, goals, and style. At the end, you’ll receive a clear guide with recommendations, visual references, and next steps.',
+		q04: 'Can I hire just part of the process, like color or furniture selection?',
+		a04: 'Absolutely. We can help only with the stage you need—layout, decoration, finishes, or shopping. We adapt to what you’re really looking for.',
+		q05: 'How do I know if this service is right for me?',
+		a05: 'If you want to transform your space with intention, without complications, and value a professional yet approachable guide—this service is for you.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<section class="bg-accent radius mx-auto flex w-[80%] flex-col gap-8 p-8 text-center shadow-2xl">
+	<div class="flex flex-col gap-8">
+		<h2 class="text-3xl font-bold">FAQs</h2>
+		<p>{t.paragraph}</p>
+	</div>
+	<div class="mx-auto flex max-w-2xl flex-col gap-4 text-left">
+		<details class="border-b pb-4">
+			<summary class="cursor-pointer text-lg font-semibold">{t.q01}</summary>
+			<p class="mt-2 text-gray-600">{t.a01}</p>
+		</details>
+
+		<details class="border-b pb-4">
+			<summary class="cursor-pointer text-lg font-semibold">{t.q02}</summary>
+			<p class="mt-2 text-gray-600">{t.a02}</p>
+		</details>
+
+		<details class="border-b pb-4">
+			<summary class="cursor-pointer text-lg font-semibold">{t.q03}</summary>
+			<p class="mt-2 text-gray-600">{t.a03}</p>
+		</details>
+
+		<details class="border-b pb-4">
+			<summary class="cursor-pointer text-lg font-semibold">{t.q04}</summary>
+			<p class="mt-2 text-gray-600">{t.a04}</p>
+		</details>
+
+		<details class="border-b pb-4">
+			<summary class="cursor-pointer text-lg font-semibold">{t.q05}</summary>
+			<p class="mt-2 text-gray-600">{t.a05}</p>
+		</details>
+	</div>
+</section>

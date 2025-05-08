@@ -1,0 +1,143 @@
+---
+// src/components/sections/Projects.astro
+// import { Picture } from 'astro:assets';
+import PlaceHolder from '../../assets/images/placeholder-1920x1080.jpg';
+import CustomButton from '../ui/CustomButton.astro';
+import { getCollection } from 'astro:content';
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title: 'Transformaciones que inspiran',
+		paragraph:
+			'Cada espacio cuenta una historia única. Descubre algunos de nuestros proyectos y déjate inspirar por ambientes que combinan funcionalidad, armonía y calidez. Desde interiores acogedores hasta renovaciones llenas de intención, diseñamos espacios que se sienten como hogar.',
+	},
+	en: {
+		title: 'Transformations that inspire',
+		paragraph:
+			'Every space tells a unique story. Explore some of our projects and get inspired by environments that blend functionality, harmony, and warmth. From cozy interiors to purpose-driven renovations, we design spaces that truly feel like home.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+
+const projects = await getCollection('projects');
+
+// const rawProjects = projects
+// 	.filter((project) => project.data.lang === lang && project.data.image)
+// 	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+// 	.slice(0, 4);
+
+const latestProjects = projects
+	.filter((project) => project.data.lang === lang && project.data.image)
+	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+	.slice(0, 4);
+
+// Rellenar con placeholders si hay menos de 4
+// const latestProjects = Array.from({ length: 4 }, (_, i) => {
+// 	return (
+// 		rawProjects[i] ?? {
+// 			data: {
+// 				image: PlaceHolder.src,
+// 				title: 'Proyecto en desarrollo',
+// 				slug: '#',
+// 			},
+// 		}
+// 	);
+// });
+
+// const filledProjects = Array.from({ length: 4 }, (_, i) => {
+// 	return (
+// 		latestProjects[i] ?? {
+// 			data: {
+// 				title: 'Proyecto en desarrollo',
+// 				slug: '#',
+// 				image: PlaceHolder.src,
+// 			},
+// 		}
+// 	);
+// });
+
+// Asegurar que siempre haya 4 proyectos, rellenando con el placeholder
+const filledProjects = Array.from({ length: 4 }, (_, i) => {
+	return (
+		latestProjects[i] ?? {
+			data: {
+				title: 'Proyecto en desarrollo',
+				slug: '#',
+				image: PlaceHolder.src,
+			},
+		}
+	);
+});
+
+console.log(projects.map((p) => ({ title: p.data.title, lang: p.data.lang, image: p.data.image })));
+---
+
+<section class="responsive flex w-full flex-col gap-10 overflow-hidden p-4 px-8">
+	<span class="sr-only">Galería</span>
+	<div class="flex flex-col gap-10 text-center">
+		<h2>{t.title}</h2>
+		<p class="text-secondary">{t.paragraph}</p>
+	</div>
+
+	<!-- Galería para escritorio -->
+	<div class="mb-12 hidden h-[600px] gap-4 md:flex">
+		<!-- Columna izquierda -->
+		<div class="flex h-full w-1/2 flex-col gap-4">
+			{
+				filledProjects.slice(0, 2).map((project, index) => (
+					<figure class={`radius ${index === 0 ? 'h-2/3' : 'h-1/3'} shadow-2xl`}>
+						<a href={`/${lang}/portfolio/${project.data.slug}`}>
+							<img
+								src={project.data.image}
+								alt={project.data.title}
+								class="radius h-full w-full transform object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+								loading="lazy"
+							/>
+						</a>
+					</figure>
+				))
+			}
+		</div>
+
+		<!-- Columna derecha -->
+		<div class="flex h-full w-1/2 flex-col gap-4">
+			{
+				filledProjects.slice(2, 4).map((project, index) => (
+					<figure class={`radius ${index === 0 ? 'h-1/3' : 'h-2/3'} shadow-2xl`}>
+						<a href={`/${lang}/portfolio/${project.data.slug}`}>
+							<img
+								src={project.data.image ?? PlaceHolder.src}
+								alt={project.data.title}
+								class="radius h-full w-full transform object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+								loading="lazy"
+							/>
+						</a>
+					</figure>
+				))
+			}
+		</div>
+	</div>
+
+	<!-- Galería responsiva para móviles -->
+	<div class="flex flex-col gap-6 md:hidden">
+		{
+			filledProjects.map((project) => (
+				<figure class="radius h-[280px] shadow-2xl">
+					<a href={`/${lang}/portfolio/${project.data.slug}`}>
+						<img
+							src={project.data.image}
+							alt={project.data.title}
+							class="radius h-full w-full transform object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+							loading="lazy"
+						/>
+					</a>
+				</figure>
+			))
+		}
+	</div>
+
+	<CustomButton lang={lang} key="portfolio" />
+</section>

@@ -1,0 +1,189 @@
+---
+// src/components/ImageAccordion.astro
+
+import { Picture } from 'astro:assets';
+const { lang = 'es', imageSrc, blockName } = Astro.props;
+
+// Traducciones directamente en el componente
+const translations = {
+	es: {
+		blocks: {
+			valeriaMuñoz: {
+				name: 'Valeria Muñoz',
+				positions01: 'Directora Creativa y Fundadora',
+				training: 'Formación:',
+				paragraph02: 'Diseñadora de interiores con más de 8 años de experiencia.',
+				since: 'En el equipo desde:',
+				paragraph03: 'Fundadora desde el inicio, en 2021.',
+				motivation: 'Motivación:',
+				paragraph04:
+					'Me apasiona crear espacios que reflejen la personalidad de las personas y mejoren su calidad de vida.',
+				enjoy: 'Lo que más disfruto:',
+				paragraph05:
+					'Ver cómo una idea se convierte en un entorno real que transforma la vida de quien lo habita.',
+				fact: 'Dato curioso:',
+				paragraph06: 'Amo la jardinería y me inspiro mucho en la naturaleza para los proyectos.',
+			},
+			andreaTorres: {
+				name: 'Andrea Torres',
+				positions01: 'Diseñadora de Interiores',
+				training: 'Formación:',
+				paragraph02:
+					'Licenciada en Diseño Ambiental con especialización en estilismo de interiores.',
+				since: 'En el equipo desde:',
+				paragraph03: '2022',
+				motivation: 'Motivación:',
+				paragraph04:
+					'Disfruto darle forma a las ideas y ver cómo los espacios cobran vida con detalles únicos.',
+				enjoy: 'Lo que más disfruto:',
+				paragraph05:
+					'El proceso de curar cada elemento hasta que el espacio cuenta una historia coherente.',
+				fact: 'Dato curioso:',
+				paragraph06: 'Colecciono revistas de diseño desde los 15 años.',
+			},
+			luisMartinez: {
+				name: 'Luis Martínez',
+				positions01: 'Arquitecto Técnico',
+				training: 'Formación:',
+				paragraph02: 'Arquitecto con enfoque en soluciones estructurales y viabilidad de proyecto.',
+				since: 'En el equipo desde:',
+				paragraph03: '2023',
+				motivation: 'Motivación:',
+				paragraph04:
+					'Me entusiasma convertir los conceptos de diseño en soluciones técnicas reales y seguras.',
+				enjoy: 'Lo que más disfruto:',
+				paragraph05:
+					'Resolver los retos constructivos para que cada idea sea posible sin perder su esencia.',
+				fact: 'Dato curioso:',
+				paragraph06: 'Es un apasionado del dibujo a mano alzada y los croquis rápidos.',
+			},
+			sofiaRivas: {
+				name: 'Sofía Rivas',
+				positions01: 'Coordinadora de Proyectos',
+				training: 'Formación:',
+				paragraph02:
+					'Administradora de proyectos creativos con experiencia en logística y atención al cliente.',
+				since: 'En el equipo desde:',
+				paragraph03: '2021',
+				motivation: 'Motivación:',
+				paragraph04:
+					'Me gusta que cada pieza del proyecto encaje a la perfección, para que el cliente solo se preocupe por disfrutar el resultado.',
+				enjoy: 'Lo que más disfruto:',
+				paragraph05:
+					'La satisfacción de ver todo funcionando en armonía, como un rompecabezas que se completa con precisión.',
+				fact: 'Dato curioso:',
+				paragraph06: 'Tiene una obsesión adorable con las agendas y la papelería bonita.',
+			},
+		},
+	},
+	en: {
+		blocks: {
+			valeriaMuñoz: {
+				name: 'Valeria Muñoz',
+				positions01: 'Creative Director and Founder',
+				training: 'Education:',
+				paragraph02: 'Interior designer with over 8 years of experience.',
+				since: 'Part of the team since:',
+				paragraph03: 'Founder since the beginning, in 2021.',
+				motivation: 'Motivation:',
+				paragraph04:
+					'I am passionate about creating spaces that reflect people’s personalities and improve their quality of life.',
+				enjoy: 'What I enjoy most:',
+				paragraph05:
+					'Seeing how an idea turns into a real environment that transforms the lives of those who inhabit it.',
+				fact: 'Fun fact:',
+				paragraph06: 'I love gardening and draw a lot of inspiration from nature for projects.',
+			},
+			andreaTorres: {
+				name: 'Andrea Torres',
+				positions01: 'Interior Designer',
+				training: 'Education:',
+				paragraph02:
+					'Bachelor’s degree in Environmental Design with a specialization in interior styling.',
+				since: 'Part of the team since:',
+				paragraph03: '2022',
+				motivation: 'Motivation:',
+				paragraph04:
+					'I enjoy bringing ideas to life and seeing spaces come alive with unique details.',
+				enjoy: 'What I enjoy most:',
+				paragraph05: 'The process of curating each element until the space tells a cohesive story.',
+				fact: 'Fun fact:',
+				paragraph06: 'I have been collecting design magazines since I was 15 years old.',
+			},
+			luisMartinez: {
+				name: 'Luis Martínez',
+				positions01: 'Technical Architect',
+				training: 'Education:',
+				paragraph02: 'Architect focused on structural solutions and project feasibility.',
+				since: 'Part of the team since:',
+				paragraph03: '2023',
+				motivation: 'Motivation:',
+				paragraph04: 'I’m excited to turn design concepts into real and safe technical solutions.',
+				enjoy: 'What I enjoy most:',
+				paragraph05:
+					'Solving construction challenges so that every idea is possible without losing its essence.',
+				fact: 'Fun fact:',
+				paragraph06: 'He is passionate about freehand drawing and quick sketches.',
+			},
+			sofiaRivas: {
+				name: 'Sofía Rivas',
+				positions01: 'Project Coordinator',
+				training: 'Education:',
+				paragraph02: 'Creative project manager with experience in logistics and customer service.',
+				since: 'Part of the team since:',
+				paragraph03: '2021',
+				motivation: 'Motivation:',
+				paragraph04:
+					'I love ensuring that every piece of the project fits perfectly, so the client can simply enjoy the result.',
+				enjoy: 'What I enjoy most:',
+				paragraph05:
+					'The satisfaction of seeing everything working in harmony, like a perfectly completed puzzle.',
+				fact: 'Fun fact:',
+				paragraph06: 'She has an adorable obsession with planners and cute stationery.',
+			},
+		},
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+const data = t.blocks?.[blockName] ?? {};
+---
+
+<div class="bg-accent radius flex flex-col gap-4 p-4 shadow-2xl">
+	<div class="flex flex-col gap-4">
+		<figure class="radius h-[300px] shadow-2xl">
+			<Picture
+				src={imageSrc}
+				alt={data.alt || 'Default alt text'}
+				class="radius h-full w-full object-cover"
+			/>
+			<figcaption class="sr-only">{data.alt || 'Default alt text'}</figcaption>
+		</figure>
+		<div class="flex flex-col gap-4">
+			<div class="mt-2 flex flex-col gap-2 text-center">
+				<h3>{data.name}</h3>
+				<p>{data.positions01}</p>
+			</div>
+			<div class="flex flex-col gap-2">
+				<span class="text-lg font-bold text-neutral-700">{data.training}</span>
+				<p class="p-fixed">{data.paragraph02}</p>
+			</div>
+			<div class="flex flex-col gap-2">
+				<span class="text-lg font-bold text-neutral-700">{data.since}</span>
+				<p class="p-fixed">{data.paragraph03}</p>
+			</div>
+			<div class="flex flex-col gap-2">
+				<span class="text-lg font-bold text-neutral-700">{data.motivation}</span>
+				<p class="p-fixed">{data.paragraph04}</p>
+			</div>
+			<div class="flex flex-col gap-2">
+				<span class="text-lg font-bold text-neutral-700">{data.enjoy}</span>
+				<p class="p-fixed">{data.paragraph05}</p>
+			</div>
+			<div class="flex flex-col gap-2">
+				<span class="text-lg font-bold text-neutral-700">{data.fact}</span>
+				<p class="p-fixed">{data.paragraph06}</p>
+			</div>
+		</div>
+	</div>
+</div>

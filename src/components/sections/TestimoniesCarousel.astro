@@ -1,0 +1,199 @@
+---
+// src/components/TestimoniesCarousel.astro
+import TestimonyCard from '../ui/TestimonyCard.astro';
+
+const { testimoniesToShow = [], lang = 'es' } = Astro.props;
+const lastThreeTestimonials = [...testimoniesToShow]
+	.sort((a, b) => new Date(b.date) - new Date(a.date))
+	.slice(0, 3);
+---
+
+<div class="relative w-full overflow-hidden">
+	<div
+		class="carousel-slide ml-[calc(50%-226px)] flex min-h-[500px] w-full flex-none translate-y-5 items-center gap-20 px-4 opacity-0 transition-all duration-700 ease-out md:ml-[calc(50%-220px)]"
+		id="CarouselWrapper"
+		role="region"
+		aria-roledescription="carrusel"
+		aria-label="Testimonios de clientes"
+		aria-live="polite"
+	>
+		{
+			lastThreeTestimonials.map((t) => (
+				<div class="carousel-item">
+					<TestimonyCard
+						author={t.author}
+						image={t.image}
+						testimony={t.testimony}
+						stars={t.stars}
+						date={t.date}
+					/>
+				</div>
+			))
+		}
+	</div>
+
+	<button
+		class="absolute top-[240px] left-2 flex h-10 w-10 -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full bg-white/70 text-xl font-bold shadow transition hover:bg-white"
+		id="prevButton"
+		aria-label="Testimonio anterior"
+	>
+		←
+	</button>
+
+	<button
+		class="absolute top-[240px] right-2 flex h-10 w-10 -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full bg-white/70 text-xl font-bold shadow transition hover:bg-white"
+		id="nextButton"
+		aria-label="Siguiente testimonio"
+	>
+		→
+	</button>
+
+	<!-- Indicadores (dots) -->
+	<div
+		class="mt-6 flex justify-center gap-3"
+		id="carouselDots"
+		aria-label="Indicadores de carrusel"
+	>
+		{
+			lastThreeTestimonials.map((_, i) => (
+				<button
+					class="dot h-3 w-3 rounded-full bg-gray-300 transition-colors duration-300"
+					aria-label={`Ir al testimonio ${i + 1}`}
+					data-dot-index={i}
+				/>
+			))
+		}
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const wrapper = document.getElementById('CarouselWrapper');
+		if (!(wrapper instanceof HTMLElement)) return;
+
+		requestAnimationFrame(() => {
+			wrapper.classList.remove('opacity-0');
+			wrapper.classList.remove('translate-y-5');
+			updateCarousel();
+		});
+
+		const items = Array.from(wrapper.children).filter((item) => item instanceof HTMLElement);
+		if (items.length === 0) return;
+
+		let currentIndex = 0;
+		const totalItems = items.length;
+		const gap = 80;
+
+		items.forEach((item, index) => {
+			setTimeout(() => {
+				item.classList.add('appear');
+			}, index * 200);
+		});
+
+		const updateCarousel = () => {
+			const itemWidth = items[0].offsetWidth;
+			const offset = currentIndex * (itemWidth + gap);
+			wrapper.style.transform = `translateX(-${offset}px)`;
+
+			items.forEach((item, index) => {
+				item.classList.toggle('focused', index === currentIndex);
+				if (index === currentIndex) {
+					// console.log('Focused item:', index, item);
+				}
+			});
+
+			updateDots();
+		};
+
+		document.getElementById('nextButton')?.addEventListener('click', () => {
+			currentIndex = (currentIndex + 1) % totalItems;
+			updateCarousel();
+		});
+
+		document.getElementById('prevButton')?.addEventListener('click', () => {
+			currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+			updateCarousel();
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowRight') {
+				currentIndex = (currentIndex + 1) % totalItems;
+				updateCarousel();
+			} else if (e.key === 'ArrowLeft') {
+				currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+				updateCarousel();
+			}
+		});
+
+		const dots = Array.from(document.querySelectorAll('#carouselDots .dot'));
+
+		const updateDots = () => {
+			dots.forEach((dot, i) => {
+				dot.classList.toggle('bg-gray-800', i === currentIndex);
+				dot.classList.toggle('bg-gray-300', i !== currentIndex);
+			});
+		};
+
+		dots.forEach((dot, index) => {
+			dot.addEventListener('click', () => {
+				currentIndex = index;
+				updateCarousel();
+				updateDots();
+			});
+		});
+
+		updateCarousel();
+	});
+</script>
+
+<style>
+	.carousel-slide {
+		will-change: transform;
+	}
+
+	.carousel-item {
+		opacity: 0.6;
+		transform: scale(0.95);
+		transition:
+			transform 0.5s ease,
+			box-shadow 0.5s ease,
+			opacity 0.5s ease;
+	}
+
+	.carousel-item.focused {
+		transform: scale(1.1) translateY(-5px) !important;
+		opacity: 1;
+		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+		z-index: 10;
+		/* TEMPORALMENTE para pruebas */
+		/* border: 2px solid red; */
+	}
+
+	.carousel-item.appear {
+		animation: slideIn 0.6s ease forwards;
+	}
+
+	@keyframes slideIn {
+		from {
+			opacity: 0;
+			transform: translateY(40px) scale(0.9);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(0.95);
+		}
+	}
+
+	button:hover {
+		transform: scale(1.1);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	button:active {
+		transform: scale(0.95);
+	}
+
+	.dot.bg-gray-800 {
+		background-color: #1f2937;
+	}
+</style>

@@ -1,0 +1,60 @@
+---
+// src/components/sections/AccordionPackages.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title: '¿Qué necesito para comenzar?',
+		requirements: [
+			'Medidas o plano del espacio (si aplica)',
+			'Algunas fotos actuales',
+			'Un pequeño cuestionario para entender tu estilo y necesidades',
+		],
+		conditionsTitle: 'Condiciones:',
+		conditions: [
+			'Se requiere un anticipo para comenzar',
+			'La agenda está sujeta a disponibilidad',
+			'El servicio no incluye ejecución de obra, pero puedo recomendar proveedores',
+		],
+	},
+	en: {
+		title: 'What do I need to get started?',
+		requirements: [
+			'Dimensions or floor plan of the space (if applicable)',
+			'A few current photos',
+			'A short questionnaire to understand your style and needs',
+		],
+		conditionsTitle: 'Terms:',
+		conditions: [
+			'An upfront payment is required to start',
+			'Appointments are subject to availability',
+			'The service does not include construction, but I can recommend suppliers',
+		],
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center text-xl font-bold">{t.title}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<ul class="text-secondary line-inside flex list-disc flex-col gap-2 space-y-1 px-4 text-base">
+			{t.requirements.map((req) => <li>{req}</li>)}
+		</ul>
+
+		<details class="flex cursor-pointer flex-col gap-2">
+			<summary class="text-secondary text-base">{t.conditionsTitle}</summary>
+			<ul class="text-secondary line-inside flex list-disc flex-col gap-2 space-y-1 px-4 text-base">
+				{t.conditions.map((cond) => <li>{cond}</li>)}
+			</ul>
+		</details>
+	</div>
+</details>

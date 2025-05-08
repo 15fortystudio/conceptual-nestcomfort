@@ -1,0 +1,76 @@
+---
+// src/components/layouts/HamburguerMenu.astro
+import NavLink from './NavLink.astro';
+
+const { lang = 'es' } = Astro.props;
+---
+
+<nav class="flex items-center">
+	<button
+		id="toggleMenuBtn"
+		class="flex h-8 w-8 cursor-pointer items-center justify-center rounded xl:hidden"
+		aria-label="Abrir menú de navegación"
+		aria-controls="menu-hamburguer"
+	>
+		<img
+			src="/src/assets/icons/menu_24dp_434343_wght400.svg"
+			width={32}
+			height={32}
+			class="p-[10%]"
+			alt="Menú"
+		/>
+	</button>
+</nav>
+
+<ul
+	id="menu-hamburguer"
+	class="radius bg-accent pointer-events-none absolute right-0 z-20 mt-98 mr-[5%] flex flex-col gap-4 p-4 text-end opacity-0 shadow-lg transition-all duration-300 sm:mr-[10%]"
+>
+	<NavLink lang={lang} />
+</ul>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const toggleMenuBtn = document.getElementById('toggleMenuBtn');
+		const menu = document.getElementById('menu-hamburguer');
+
+		if (!toggleMenuBtn || !menu) {
+			console.error('No se encontraron los elementos del menú.');
+			return;
+		}
+
+		// Función para abrir/cerrar el menú
+		function toggleMenu() {
+			if (menu) {
+				// Añadir comprobación de nullidad para `menu`
+				menu.classList.toggle('opacity-100');
+				menu.classList.toggle('pointer-events-auto');
+				menu.classList.toggle('opacity-0');
+				menu.classList.toggle('pointer-events-none');
+			}
+		}
+
+		// Evento para el botón de menú
+		toggleMenuBtn.addEventListener('click', toggleMenu);
+
+		// Cerrar el menú cuando se haga clic en un enlace
+		menu.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => {
+				menu.classList.add('opacity-0', 'pointer-events-none');
+				menu.classList.remove('opacity-100', 'pointer-events-auto');
+			});
+		});
+
+		document.addEventListener('click', (event) => {
+			const target = event.target;
+
+			if (target instanceof Node) {
+				// Verificar que target es un Node
+				if (!(menu.contains(target) || toggleMenuBtn.contains(target))) {
+					menu.classList.add('opacity-0', 'pointer-events-none');
+					menu.classList.remove('opacity-100', 'pointer-events-auto');
+				}
+			}
+		});
+	});
+</script>

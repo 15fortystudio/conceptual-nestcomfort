@@ -1,0 +1,26 @@
+---
+// src/components/BaseHead.astro
+
+const { lang = 'es' } = Astro.props;
+
+// Definir las traducciones aquí
+const translations = {
+	es: {
+		title: 'Bienvenido a Nest Comfort',
+		// Puedes agregar otras traducciones de metadatos si es necesario
+	},
+	en: {
+		title: 'Welcome to Nest Comfort',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<meta name="viewport" content="width=device-width" />
+	<meta name="generator" content={Astro.generator} />
+	<title>{t.title}</title>
+</head>

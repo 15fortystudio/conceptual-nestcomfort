@@ -1,0 +1,35 @@
+---
+// src/pages/[lang]/portfolio/index.astro
+
+// ----- Function
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+const { lang = 'es' } = Astro.params;
+
+const translations = {
+	es: {
+		title: 'Redireccionando...',
+		paragraph: 'Redireccionando a la página de portafolio...',
+	},
+	en: {
+		title: 'Redirecting...',
+		paragraph: 'Redirecting to the portfolio page...',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<html lang={lang}>
+	<head>
+		<meta http-equiv="refresh" content={`0; url=/${lang}/portfolio/page/1`} />
+		<meta charset="UTF-8" />
+		<title>{t.title}</title>
+	</head>
+	<body>
+		<p>{t.paragraph}</p>
+	</body>
+</html>

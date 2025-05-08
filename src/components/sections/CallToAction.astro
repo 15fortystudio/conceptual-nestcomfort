@@ -1,0 +1,41 @@
+---
+// src/components/CallToAction.astro
+import { Picture } from 'astro:assets';
+import CustomButton from '../ui/CustomButton.astro';
+import CTA from '../../assets/images/cta.webp';
+const { lang = 'es', alt = 'Imagen de fondo decorativa' } = Astro.props;
+
+const translations = {
+	es: {
+		alt: 'Una elegante sala de estar con plantas en macetas, un sofá gris texturizado y una almohada decorativa con estampados de cactus coloridos.',
+		title: 'Descubre cómo podemos transformar tu hogar',
+		paragraph:
+			'Creamos espacios que reflejan tu estilo, elevan tu bienestar y se adaptan a tu forma de vivir. Agendemos una asesoría para comenzar a diseñar el hogar que siempre imaginaste.',
+	},
+	en: {
+		alt: 'A stylish living room featuring potted plants, a textured gray couch, and a decorative pillow with colorful cactus prints.',
+		title: 'Discover how we can transform your home',
+		paragraph:
+			'We create spaces that reflect your style, enhance your well-being, and adapt to your way of living. Let’s schedule a consultation to begin designing the home you’ve always imagined.',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<section class="relative w-full overflow-hidden">
+	<span class="sr-only">Call to action</span>
+	<figure class="absolute inset-0 -z-10">
+		<Picture src={CTA} alt={alt} class="h-full w-full object-cover" />
+		<figcaption class="sr-only">{alt}</figcaption>
+	</figure>
+
+	<!-- Overlay: oscurece ligeramente la imagen -->
+	<div class="absolute inset-0 -z-10 bg-black/70"></div>
+
+	<div class="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 px-4 py-20 text-center">
+		<h2 class="">{t.title}</h2>
+		<span class="p-white">{t.paragraph}</span>
+		<CustomButton lang={lang} key="cta" />
+	</div>
+</section>

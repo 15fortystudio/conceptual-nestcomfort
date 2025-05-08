@@ -1,0 +1,33 @@
+---
+// src/components/sections/AccordionForWho.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title: 'Duración estimada según el servicio:',
+		list: ['Asesoría: 1 a 2 horas', 'Rediseño: 1 a 2 semanas', 'Diseño completo: 3 a 6 semanas'],
+	},
+	en: {
+		title: 'Estimated duration by service:',
+		list: ['Consultation: 1 to 2 hours', 'Redesign: 1 to 2 weeks', 'Full design: 3 to 6 weeks'],
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<details open class="shadow-2xl">
+	<summary
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+	>
+		<h3 class="w-full text-center">{t.title}</h3>
+		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
+	</summary>
+
+	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
+		<ul class="text-secondary line-inside flex list-disc flex-col space-y-1 px-4 text-base">
+			{t.list.map((list) => <li>{list}</li>)}
+		</ul>
+	</div>
+</details>

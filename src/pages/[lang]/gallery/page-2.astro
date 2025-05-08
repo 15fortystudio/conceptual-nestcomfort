@@ -1,0 +1,49 @@
+---
+// src/pages/[lang]/gallery/page-2.astro
+
+// ----- Components
+
+import Banner from '../../../components/sections/Banner.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ContentGallery from '../../../components/sections/ContentGallery.astro';
+
+// ----- Images
+
+import PlaceHolder from '../../../assets/images/placeholder-1920x1080.jpg';
+import Photo0 from '../../../assets/images/gallery/photo0.webp';
+import Photo1 from '../../../assets/images/gallery/photo1.webp';
+import Photo2 from '../../../assets/images/gallery/photo2.webp';
+import Photo3 from '../../../assets/images/gallery/photo3.webp';
+import Photo4 from '../../../assets/images/gallery/photo4.webp';
+import Photo5 from '../../../assets/images/gallery/photo5.webp';
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+const { lang = 'es' } = Astro.params;
+
+const translations = {
+	es: {
+		previous: 'Anterior',
+	},
+	en: {
+		previous: 'Previous',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<BaseLayout lang={lang}>
+	<Banner imageSrc={PlaceHolder} key="gallery" lang={lang} />
+
+	<section class="">
+		<ContentGallery photos={[Photo0, Photo1, Photo2, Photo3, Photo4, Photo5]} />
+	</section>
+
+	<!-- Navegación inferior -->
+	<nav class="text-center">
+		<a href={`/${lang}/gallery/`}>&lt; {t.previous}</a>
+	</nav>
+</BaseLayout>
