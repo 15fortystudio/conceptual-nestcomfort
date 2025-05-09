@@ -1,48 +1,8 @@
 ---
 // src/components/layouts/Navigation.astro
+import { translations } from '../../utils/translation';
 
-type Lang = 'es' | 'en';
-const lang = (Astro.props.lang ?? 'es') as Lang;
-
-// Tipamos el objeto translations completamente
-type TranslationEntry = {
-	label: string;
-	path: string;
-};
-
-type Translations = {
-	[lang in Lang]: {
-		services: TranslationEntry;
-		aboutUs: TranslationEntry;
-		portfolio: TranslationEntry;
-		gallery: TranslationEntry;
-		blog: TranslationEntry;
-		testimonies: TranslationEntry;
-		contact: TranslationEntry;
-	};
-};
-
-const translations: Translations = {
-	es: {
-		services: { label: 'Servicios', path: 'services' },
-		aboutUs: { label: 'Sobre Nosotros', path: 'about-us' },
-		portfolio: { label: 'Portafolio', path: 'portfolio' },
-		gallery: { label: 'Galeria', path: 'gallery' },
-		blog: { label: 'Blog', path: 'blog' },
-		testimonies: { label: 'Testimonios', path: 'testimonies' },
-		contact: { label: 'Contacto', path: 'contact' },
-	},
-	en: {
-		services: { label: 'Services', path: 'services' },
-		aboutUs: { label: 'About Us', path: 'about-us' },
-		portfolio: { label: 'Portfolio', path: 'portfolio' },
-		gallery: { label: 'Gallery', path: 'gallery' },
-		blog: { label: 'Blog', path: 'blog' },
-		testimonies: { label: 'Testimonies', path: 'testimonies' },
-		contact: { label: 'Contact', path: 'contact' },
-	},
-};
-
+const lang = Astro.props.lang || 'es';
 const t = translations[lang];
 
 const links = [

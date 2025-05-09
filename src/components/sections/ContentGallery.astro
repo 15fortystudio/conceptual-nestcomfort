@@ -6,29 +6,35 @@ import GalleryImage from '../../components/ui/GalleryImage.astro';
 const { photos }: { photos: any[] } = Astro.props;
 ---
 
-<section class="responsive flex h-200 flex-col gap-4 sm:h-250 md:h-300 lg:h-350 xl:h-400">
-	<div class="h-1/2">
+<section class="responsive grid gap-4">
+	<!-- Primera imagen ocupa toda la fila superior -->
+	<div>
 		<GalleryImage src={photos[0]} />
 	</div>
-	<div class="flex h-1/2 flex-col gap-4">
-		<div class="h-1/2">
-			<GalleryImage src={photos[1]} />
-		</div>
-		<div class="flex h-1/2 gap-4">
-			<div class="w-1/2">
+
+	<!-- Resto de la galería en dos columnas -->
+	<div class="grid grid-cols-2 gap-4">
+		<!-- Columna izquierda -->
+		<div class="flex flex-col gap-4">
+			<div class="flex-1">
+				<GalleryImage src={photos[1]} />
+			</div>
+			<div class="flex-1">
 				<GalleryImage src={photos[2]} />
 			</div>
-			<div class="flex w-1/2 flex-col gap-4">
-				<div class="h-1/2">
-					<GalleryImage src={photos[3]} />
+		</div>
+
+		<!-- Columna derecha -->
+		<div class="flex flex-col gap-4">
+			<div class="flex-1">
+				<GalleryImage src={photos[3]} />
+			</div>
+			<div class="flex flex-1 gap-4">
+				<div class="w-1/2">
+					<GalleryImage src={photos[4]} />
 				</div>
-				<div class="flex h-1/2 gap-4">
-					<div class="w-1/2">
-						<GalleryImage src={photos[4]} />
-					</div>
-					<div class="w-1/2">
-						<GalleryImage src={photos[5]} />
-					</div>
+				<div class="w-1/2">
+					<GalleryImage src={photos[5]} />
 				</div>
 			</div>
 		</div>

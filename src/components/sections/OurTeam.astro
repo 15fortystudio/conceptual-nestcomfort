@@ -5,12 +5,15 @@ const { lang = 'es' } = Astro.props;
 
 const translations = {
 	es: {
-		heading: 'Nuesto equipo',
+		heading: 'Nuestro equipo',
 		paragraph:
-			'En Nest Comfort, cada integrante aporta su visión, talento y pasión para transformar espacios en refugios que inspiran. ',
-		paragraph02: '',
+			'En Nest Comfort, cada integrante aporta su visión, talento y pasión para transformar espacios en refugios que inspiran.',
 	},
-	en: {},
+	en: {
+		heading: 'Our Team',
+		paragraph:
+			'At Nest Comfort, each team member brings their vision, talent, and passion to transform spaces into inspiring sanctuaries.',
+	},
 };
 
 const t = translations[lang] ?? translations['es'];

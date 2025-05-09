@@ -46,13 +46,16 @@ const t = translations[lang] ?? translations['es'];
 	</summary>
 
 	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
-		<ul class="text-secondary line-inside flex list-disc flex-col gap-2 space-y-1 px-4 text-base">
+		<ul class="line-inside p-fixed flex list-disc flex-col gap-2 space-y-1 px-4">
 			{t.requirements.map((req) => <li>{req}</li>)}
 		</ul>
 
 		<details class="flex cursor-pointer flex-col gap-2">
-			<summary class="text-secondary text-base">{t.conditionsTitle}</summary>
-			<ul class="text-secondary line-inside flex list-disc flex-col gap-2 space-y-1 px-4 text-base">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.conditionsTitle}</summary
+			>
+			<ul class="line-inside p-fixed flex list-disc flex-col gap-2 space-y-1 px-4">
 				{t.conditions.map((cond) => <li>{cond}</li>)}
 			</ul>
 		</details>

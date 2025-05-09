@@ -15,12 +15,13 @@ import CTA from '../../assets/images/cta.webp';
 
 // ---------- FUNCTION ----------
 
-const { lang = 'es' } = Astro.props;
+const { lang = 'es' } = Astro.params;
 
+// Traducciones directamente en el componente
 // Traducciones directamente en el componente
 const translations = {
 	es: {
-		alt: 'Direccion de google maps',
+		alt: 'Dirección de Google Maps',
 		title: '¿Hablamos?',
 		paragraph01:
 			'Si tienes dudas, una idea rondando en la cabeza o simplemente quieres saber cómo podríamos trabajar juntos, me encantará escucharte.',
@@ -28,7 +29,15 @@ const translations = {
 		paragraph03:
 			'Respondo en un plazo de 24 a 48 horas hábiles, de lunes a viernes entre 10 am y 6 pm. Si escribes fuera de ese horario, te contesto lo antes posible.',
 	},
-	en: {},
+	en: {
+		alt: 'Google Maps address',
+		title: 'Shall we talk?',
+		paragraph01:
+			'If you have any doubts, an idea in mind, or simply want to know how we could work together, I would love to listen to you.',
+		paragraph02: 'Email: contacto@nestcomfort.mx',
+		paragraph03:
+			'I respond within 24 to 48 business hours, Monday through Friday between 10 am and 6 pm. If you write outside of those hours, I will reply as soon as possible.',
+	},
 };
 
 export async function getStaticPaths() {
@@ -50,7 +59,7 @@ const t = translations[lang] ?? translations['es'];
 				<p class="">{t.paragraph02}</p>
 				<p class="">{t.paragraph03}</p>
 			</div>
-			<div class="radius relative min-h-[300px] items-stretch shadow-2xl md:w-1/2">
+			<div class="radius relative min-h-[300px] items-stretch shadow-2xl md:w-1/2 xl:min-h-[500px]">
 				<div class="radius absolute inset-0 shadow-2xl">
 					<Map class="radius h-full w-full shadow-2xl" />
 				</div>

@@ -15,8 +15,13 @@ const translations = {
 const t = translations[lang] ?? translations['es'];
 ---
 
-<article class="flex flex-col gap-4">
-	<img src={image} alt={title} class="h-[300px] w-full object-cover shadow-2xl" loading="lazy" />
+<article class="flex flex-col gap-8">
+	<img
+		src={image}
+		alt={title}
+		class="radius h-[300px] w-full object-cover shadow-2xl"
+		loading="lazy"
+	/>
 
 	<div class="text-center">
 		<h3>{title}</h3>

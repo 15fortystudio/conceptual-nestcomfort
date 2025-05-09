@@ -50,11 +50,11 @@ const translations = {
 const t = translations[lang] ?? translations['es'];
 ---
 
-<div class="bg-accent radius flex flex-col items-center gap-4 p-8 text-center shadow-2xl md:p-4">
+<div class="bg-accent radius flex flex-col items-center gap-8 px-8 py-12 text-center shadow-2xl">
 	<figure class="h-[96px] w-[96px]">
 		<Picture src={imageSrc} alt={t.blocks[Key]?.title} class="h-full w-full object-cover" />
 		<figcaption class="sr-only">{t.blocks[Key]?.title}</figcaption>
 	</figure>
 	<h2>{t.blocks[Key]?.title}</h2>
-	<p>{t.blocks[Key]?.paragraph}</p>
+	<span class="p-fixed">{t.blocks[Key]?.paragraph}</span>
 </div>

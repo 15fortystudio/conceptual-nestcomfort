@@ -84,11 +84,11 @@ const t = translations[lang] ?? translations['es'];
 		{
 			t.blocks.map((block, index) => (
 				<div key={index}>
-					<details class="group border-accent radius border-b py-4">
-						<summary class="group-open:text-primary cursor-pointer font-medium transition-all">
+					<details class="group border-accent radius flex flex-col gap-2 border-b py-4">
+						<summary class="group-open:text-primary text-link cursor-pointer text-lg font-semibold transition-all">
 							{block.title}
 						</summary>
-						<p class="mt-2">{block.paragraph}</p>
+						<span class="p-fixed mt-2">{block.paragraph}</span>
 					</details>
 				</div>
 			))

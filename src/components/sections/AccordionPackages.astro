@@ -45,7 +45,7 @@ const t = translations[lang] ?? translations['es'];
 
 <details open class="shadow-2xl">
 	<summary
-		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b-2 p-2"
+		class="bg-accent group radius border-accent relative mx-auto flex w-full cursor-pointer items-center justify-center border-b p-2"
 	>
 		<h3 class="w-full text-center text-xl font-bold">{t.title}</h3>
 		<span class="absolute right-4 transition-transform group-open:rotate-180">▼</span>
@@ -53,30 +53,48 @@ const t = translations[lang] ?? translations['es'];
 
 	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
 		<p>{t.paragraph01}</p>
-		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
-			<summary class="text-secondary text-base">{t.subTitle01}</summary>
-			<p>{t.paragraph02}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.subTitle01}</summary
+			>
+			<span class="p-fixed">{t.paragraph02}</span>
 		</details>
-		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
-			<summary class="text-secondary text-base">{t.subTitle02}</summary>
-			<p>{t.paragraph03}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.subTitle02}</summary
+			>
+			<span class="p-fixed">{t.paragraph03}</span>
 		</details>
-		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
-			<summary class="text-secondary text-base">{t.subTitle03}</summary>
-			<p>{t.paragraph04}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.subTitle03}</summary
+			>
+			<span class="p-fixed">{t.paragraph04}</span>
 		</details>
 		<p>{t.paragraph05}</p>
-		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
-			<summary class="text-secondary text-base">{t.subTitle04} </summary>
-			<p>{t.paragraph06}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.subTitle04}
+			</summary>
+			<span class="p-fixed">{t.paragraph06}</span>
 		</details>
-		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
-			<summary class="text-secondary text-base">{t.subTitle05} </summary>
-			<p>{t.paragraph07}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.subTitle05}
+			</summary>
+			<span class="p-fixed">{t.paragraph07}</span>
 		</details>
-		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b-2">
-			<summary class="text-secondary text-base">{t.subTitle06} </summary>
-			<p>{t.paragraph08}</p>
+		<details class="border-accent flex cursor-pointer flex-col gap-2 border-b">
+			<summary
+				class="text-link group-open:text-primary cursor-pointer text-lg font-semibold transition-all"
+				>{t.subTitle06}
+			</summary>
+			<span class="p-fixed">{t.paragraph08}</span>
 		</details>
 	</div>
 </details>

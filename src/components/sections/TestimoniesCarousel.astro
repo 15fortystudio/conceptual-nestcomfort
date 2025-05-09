@@ -25,7 +25,12 @@ const lastThreeTestimonials = [...testimoniesToShow]
 						image={t.image}
 						testimony={t.testimony}
 						stars={t.stars}
-						date={t.date}
+						date={new Date(t.date).toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', {
+							weekday: 'short',
+							year: 'numeric',
+							month: 'short',
+							day: 'numeric',
+						})}
 					/>
 				</div>
 			))
@@ -161,9 +166,8 @@ const lastThreeTestimonials = [...testimoniesToShow]
 	}
 
 	.carousel-item.focused {
-		transform: scale(1.1) translateY(-5px) !important;
+		transform: scale(1.05) translateY(-5px) !important;
 		opacity: 1;
-		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 		z-index: 10;
 		/* TEMPORALMENTE para pruebas */
 		/* border: 2px solid red; */

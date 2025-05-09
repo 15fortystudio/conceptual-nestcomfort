@@ -76,7 +76,7 @@ export async function getStaticPaths() {
 }
 
 const t = translations[lang] ?? translations['es'];
-console.log(projects);
+// console.log(projects);
 ---
 
 <BaseLayout lang={lang}>
@@ -99,6 +99,7 @@ console.log(projects);
 							day: 'numeric',
 						})}
 						slug={project.slug}
+						lang={lang}
 					/>
 				))
 			}

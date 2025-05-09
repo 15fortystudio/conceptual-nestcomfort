@@ -9,7 +9,7 @@ import ContentGallery from '../../../components/sections/ContentGallery.astro';
 
 // ----- Images
 
-import PlaceHolder from '../../../assets/images/placeholder-1920x1080.jpg';
+import Gallery from '../../../assets/images/bg/bg-gallery.webp';
 import Photo0 from '../../../assets/images/gallery/photo0.webp';
 import Photo1 from '../../../assets/images/gallery/photo1.webp';
 import Photo2 from '../../../assets/images/gallery/photo2.webp';
@@ -36,7 +36,7 @@ const t = translations[lang] ?? translations['es'];
 ---
 
 <BaseLayout lang={lang}>
-	<Banner imageSrc={PlaceHolder} key="gallery" lang={lang} />
+	<Banner imageSrc={Gallery} key="gallery" lang={lang} />
 
 	<section class="">
 		<ContentGallery photos={[Photo0, Photo1, Photo2, Photo3, Photo4, Photo5]} />

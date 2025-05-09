@@ -44,10 +44,10 @@ const t = translations[lang] ?? translations['es'];
 	</summary>
 
 	<div class="border-accent radius -mt-2 flex flex-col gap-4 border-2 p-6 text-left">
-		<p>{t.paragraph01}</p>
-		<ul class="text-secondary line-inside flex list-disc flex-col space-y-1 px-4 text-base">
+		<span class="p-fixed">{t.paragraph01}</span>
+		<ul class="line-inside p-fixed flex list-disc flex-col space-y-1 px-4">
 			{t.list.map((list) => <li>{list}</li>)}
 		</ul>
-		<p>{t.paragraph02}</p>
+		<span class="p-fixed">{t.paragraph02}</span>
 	</div>
 </details>

@@ -64,7 +64,7 @@ p,
 	color: var(--color-neutral-300);
 }
 .p-fixed {
-	font-size: 1rem;
+	font-size: 1.125rem;
 }
 
 .leading {

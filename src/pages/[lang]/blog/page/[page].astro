@@ -93,11 +93,13 @@ const t = translations[lang] ?? translations['es'];
 						title={post.title}
 						image={post.image}
 						date={new Date(post.date).toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', {
+							weekday: 'short',
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 						})}
 						slug={post.slug}
+						lang={lang}
 					/>
 				))
 			}

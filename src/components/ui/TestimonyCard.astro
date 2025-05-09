@@ -1,21 +1,23 @@
 ---
 // src/components/TestimonyCard.astro
 
-const { t, author = 'Autor desconocido', image, testimony, date, stars = '0' } = Astro.props;
+const { author = 'Autor desconocido', image, testimony, date, stars = '0' } = Astro.props;
 const starCount = parseFloat(stars);
 
-const lang = t?.locale || 'es';
+// const lang = t?.locale || 'es';
 
-let formattedDate = 'Fecha desconocida';
-const parsedDate = new Date(date);
+// let formattedDate = 'Fecha desconocida';
+// const parsedDate = new Date(date);
 
-if (!isNaN(parsedDate.getTime())) {
-	formattedDate = new Intl.DateTimeFormat(lang, {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	}).format(parsedDate);
-}
+// if (!isNaN(parsedDate.getTime())) {
+// 	formattedDate = new Intl.DateTimeFormat(lang, {
+// 		year: 'numeric',
+// 		month: 'long',
+// 		day: 'numeric',
+// 	}).format(parsedDate);
+// }
+
+// console.log('Current lang:', lang);
 ---
 
 <article
@@ -63,7 +65,7 @@ if (!isNaN(parsedDate.getTime())) {
 	</div>
 
 	<blockquote class="mt-8 text-gray-700">
-		<p>"{testimony}"</p>
+		<span class="p-fixed">"{testimony}"</span>
 	</blockquote>
 	<div class="m-auto flex gap-8">
 		<img
@@ -73,7 +75,7 @@ if (!isNaN(parsedDate.getTime())) {
 		/>
 		<div class="flex flex-col justify-between text-center">
 			<p class="mt-4 font-semibold">— {author}</p>
-			<small class="text-gray-500">{formattedDate}</small>
+			<time datetime={date} class="leading">{date}</time>
 		</div>
 	</div>
 </article>

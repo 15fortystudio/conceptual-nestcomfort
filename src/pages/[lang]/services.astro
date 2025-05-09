@@ -38,7 +38,7 @@ interface Props {
 	lang: Lang;
 }
 
-const { lang = 'es' } = Astro.props as Props;
+const { lang = 'es' } = Astro.params;
 
 // Traducciones directamente en el componente
 const translations: Record<Lang, { heading: string; alt: string }> = {

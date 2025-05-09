@@ -77,8 +77,9 @@ const t = translations[lang] ?? translations['es'];
 						testimony={testimonies.testimony}
 						stars={testimonies.stars}
 						date={new Date(testimonies.date).toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-US', {
+							weekday: 'short',
 							year: 'numeric',
-							month: 'long',
+							month: 'short',
 							day: 'numeric',
 						})}
 						slug={testimonies.slug}
