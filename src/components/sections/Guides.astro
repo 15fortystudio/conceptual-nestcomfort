@@ -1,0 +1,87 @@
+---
+// src/components/sections/Guides.astro
+import { Picture } from 'astro:assets';
+import Guide from '../../assets/images/bg/bg-guides.webp';
+const { lang = 'es' } = Astro.props;
+
+// Traducciones directamente en el componente
+const translations = {
+	es: {
+		title: 'Descarga nuestras guias gratuitas',
+		alt: 'Una colección de muestras de tela y muestras de pintura en varios colores, junto con acabados de madera texturizados sobre una superficie de madera clara.',
+		paragraph01: 'Armonia visual',
+		paragraph02: 'Seleccion de colores',
+		paragraph03: 'Ambientacion natural del hogar',
+		download: 'Descargar',
+	},
+	en: {
+		title: 'Download our free guides',
+		alt: 'Una colección de muestras de tela y muestras de pintura en varios colores, junto con acabados de madera texturizados sobre una superficie de madera clara.',
+		paragraph01: 'Visual harmony',
+		paragraph02: 'Color selection',
+		paragraph03: 'Natural home ambiance',
+		download: 'Download',
+	},
+};
+
+const t = translations[lang];
+---
+
+<section
+	id="download-section"
+	class="relative flex h-full w-full flex-col gap-8 overflow-hidden p-4 shadow-lg"
+>
+	<figure class="absolute inset-0 -z-10">
+		<Picture src={Guide} alt={t.alt} class="h-full w-full object-cover" />
+		<figcaption class="sr-only">{t.alt}</figcaption>
+	</figure>
+
+	<!-- Overlay: oscurece ligeramente la imagen -->
+	<div class="absolute inset-0 -z-10 bg-black/70"></div>
+	<h2 id="download-heading" class="sr-only">{t.title}</h2>
+	<h2 class="my-auto text-center">{t.title}</h2>
+	<div class="flex justify-center gap-8">
+		<div class="flex flex-col gap-4">
+			<span class="p-white">{t.paragraph01}</span>
+			<a
+				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.5rem] bg-neutral-600 px-[1rem] py-[0.5rem] hover:scale-110"
+				style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s ease, transform 0.3s ease; "
+				aria-label="Descargar archivo test01.txt"
+				href="/download/armonia-visual.txt"
+				download
+				role="button"
+			>
+				<span class="text-lg text-white">{t.download}</span>
+				<img src="/icons/download_24dp_FFFFFF_wght400.svg" class="h-6 w-6" alt="SVG de descarga" />
+			</a>
+		</div>
+		<div class="flex flex-col gap-4">
+			<span class="p-white">{t.paragraph02}</span>
+			<a
+				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.5rem] bg-neutral-600 px-[1rem] py-[0.5rem] hover:scale-110"
+				style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s ease, transform 0.3s ease; "
+				aria-label="Descargar archivo test01.txt"
+				href="/download/seleccion-de-colores.txt"
+				download
+				role="button"
+			>
+				<span class="text-lg text-white">{t.download}</span>
+				<img src="/icons/download_24dp_FFFFFF_wght400.svg" class="h-6 w-6" alt="SVG de descarga" />
+			</a>
+		</div>
+		<div class="flex flex-col gap-4">
+			<span class="p-white">{t.paragraph03}</span>
+			<a
+				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.5rem] bg-neutral-600 px-[1rem] py-[0.5rem] hover:scale-110"
+				style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s ease, transform 0.3s ease; "
+				aria-label="Descargar archivo test01.txt"
+				href="/download/ambientacion-natural-del-hogar.txt"
+				download
+				role="button"
+			>
+				<span class="text-lg text-white">{t.download}</span>
+				<img src="/icons/download_24dp_FFFFFF_wght400.svg" class="h-6 w-6" alt="SVG de descarga" />
+			</a>
+		</div>
+	</div>
+</section>

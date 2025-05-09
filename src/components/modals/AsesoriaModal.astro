@@ -1,0 +1,72 @@
+---
+// src/components/modals/AsesoriaModal.astro
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		heading: 'Solicitar Asesoría Virtual',
+		title: 'Solicita tu Asesoría Virtual',
+		name: 'Tu nombre',
+		email: 'Correo electrónico',
+		type: 'Tipo de espacio (sala, cocina...)',
+		needs: 'Cuéntanos qué necesitas',
+		send: 'Enviar solicitud',
+	},
+	en: {
+		heading: 'Request Virtual Consultation',
+		title: 'Request Your Virtual Consultation',
+		name: 'Your name',
+		email: 'Email address',
+		type: 'Type of space (living room, kitchen...)',
+		needs: 'Tell us what you need',
+		send: 'Submit request',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<button
+	id="openModal"
+	class="radius hover:bg-link mx-auto inline-block cursor-pointer bg-neutral-600 px-4 py-2 text-center shadow-lg hover:scale-105"
+>
+	<span class="link text-white">{t.heading}</span>
+</button>
+
+<div
+	id="modal"
+	class="bg-opacity-50 fixed inset-0 z-50 flex hidden items-center justify-center bg-black/70"
+>
+	<div class="relative w-full max-w-md rounded-lg bg-white p-6">
+		<button id="closeModal" class="absolute top-2 right-2 text-xl font-bold">&times;</button>
+
+		<h2 class="mb-4 text-2xl font-semibold">{t.title}</h2>
+		
+		<form class="grid gap-4" action="https://formsubmit.co/TU_CORREO@ejemplo.com" method="POST">
+			<input type="text" name="name" placeholder={t.name} required class="rounded border p-3" />
+			<input type="email" name="email" placeholder={t.email} required class="rounded border p-3" />
+			<input type="text" name="spaceType" placeholder={t.type} class="rounded border p-3" />
+			<textarea name="message" placeholder={t.needs} rows="4" class="rounded border p-3"></textarea>
+			<button type="submit" class="hover:bg-link rounded bg-neutral-600 px-4 py-2 text-white"
+				>{t.send}</button
+			>
+		</form>
+	</div>
+</div>
+
+<script>
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+			const openBtn = document.getElementById('openModal');
+			const closeBtn = document.getElementById('closeModal');
+			const modal = document.getElementById('modal');
+
+			openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+			closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+			window.addEventListener('click', (e) => {
+				if (e.target === modal) modal.classList.add('hidden');
+			});
+		});
+	}
+</script>

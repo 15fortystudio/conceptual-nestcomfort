@@ -1,0 +1,32 @@
+---
+// src/components/layouts/Asesoria.astro
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		title01: '© 2025 Nest Comfort S.A. de C.V.',
+		title02: '| Todos los derechos reservados.',
+		title03: 'Hecho por',
+	},
+	en: {
+		title01: '© 2025 Nest Comfort Inc.',
+		title02: '| All rights reserved.',
+		title03: 'Made by',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<div class="flex items-baseline justify-between">
+	<!-- Legales -->
+	<div class="my-auto flex flex-col gap-1 md:flex-row">
+		<small class="text-left">{t.title01}</small>
+		<small class="text-left">{t.title02}</small>
+	</div>
+	<!-- author -->
+	<div class="flex flex-col items-baseline gap-1 text-neutral-400 md:flex-row">
+		<p class="legal-text text-left">{t.title03}</p>
+		<p class="text-xl font-bold text-neutral-800 md:text-2xl">15fortystudio</p>
+	</div>
+</div>

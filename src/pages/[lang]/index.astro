@@ -23,6 +23,7 @@ import Index01 from '../../assets/images/index/index-01.webp';
 import Index02 from '../../assets/images/index/index-02.webp';
 import Index03 from '../../assets/images/index/index-03.webp';
 import CTA from '../../assets/images/cta.webp';
+import Guides from '../../components/sections/Guides.astro';
 
 // ----- Function
 
@@ -37,11 +38,13 @@ const { lang = 'es' } = Astro.params;
 	<Banner imageSrc={IndexBanner} key="index" lang={lang} />
 	<TextImage lang={lang} imageSrc={Index01} Key={0} reverse={true} />
 	<VirtualAdvice lang={lang} />
+
 	<SectionServices lang={lang} />
+	<Guides lang={lang} />
 	<TextImage lang={lang} imageSrc={Index02} Key={1} reverse={false} />
 	<Divider />
 	<TextImage lang={lang} imageSrc={Index03} Key={2} reverse={true} />
-	<Projects />
+	<Projects lang={lang} />
 	<SectionTestimonials lang={lang} />
 	<FAQs lang={lang} />
 	<Experience lang={lang} />

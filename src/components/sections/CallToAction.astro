@@ -1,8 +1,9 @@
 ---
 // src/components/CallToAction.astro
 import { Picture } from 'astro:assets';
-import CustomButton from '../ui/CustomButton.astro';
+// import CustomButton from '../ui/CustomButton.astro';
 import CTA from '../../assets/images/cta.webp';
+import ContactModal from '../modals/ContactModal.astro';
 const { lang = 'es', alt = 'Imagen de fondo decorativa' } = Astro.props;
 
 const translations = {
@@ -36,6 +37,7 @@ const t = translations[lang] ?? translations['es'];
 	<div class="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 px-4 py-20 text-center">
 		<h2 class="">{t.title}</h2>
 		<span class="p-white">{t.paragraph}</span>
-		<CustomButton lang={lang} key="cta" />
+		<ContactModal lang={lang} />
+		<!-- <CustomButton lang={lang} key="cta" /> -->
 	</div>
 </section>

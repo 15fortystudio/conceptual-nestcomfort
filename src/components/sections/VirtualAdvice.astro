@@ -2,7 +2,8 @@
 // src/components/VirtualAdvice.astro
 import { Picture } from 'astro:assets';
 import Virtual from '../../assets/images/index/virtual.webp';
-import CustomButton from '../ui/CustomButton.astro';
+// import CustomButton from '../ui/CustomButton.astro';
+import AsesoriaModal from '../../components/modals/AsesoriaModal.astro';
 const { lang = 'es' } = Astro.props;
 
 // Traducciones directamente en el componente
@@ -38,6 +39,7 @@ const t = translations[lang];
 	<div class="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 px-4 py-20 text-center">
 		<h2 class="">{t.title}</h2>
 		<span class="text-lg text-neutral-300">{t.paragraph}</span>
-		<CustomButton lang={lang} key="virtual" />
+		<!-- <CustomButton lang={lang} key="virtual" /> -->
+		<AsesoriaModal lang={lang} />
 	</div>
 </section>

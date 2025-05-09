@@ -1,13 +1,18 @@
 ---
 // src/components/layouts/Footer.astro
 import Lang from '../../components/ui/Lang.astro';
+import Legal from './Legal.astro';
 import Navigation from './Navigation.astro';
 
 const { lang = 'es' } = Astro.props;
 ---
 
-<footer class="bg-accent mb-4 flex h-full w-full items-center justify-between gap-4 p-4 shadow-2xl">
-	<a href={`/${lang}/`} class="logo text-3xl font-bold">Nest Comfort</a>
-	<Navigation lang={lang} />
-	<Lang lang={lang} />
+<footer class="bg-accent mb-4 h-full w-full gap-4 p-4 shadow-2xl">
+	<div class="flex h-full w-full items-center justify-between gap-4">
+		<a href={`/${lang}/`} class="logo text-3xl font-bold">Nest Comfort</a>
+		<Navigation lang={lang} />
+		<Lang lang={lang} />
+	</div>
+	<div class="h-[4px] w-full bg-neutral-500 my-2"></div>
+	<Legal lang={lang} />
 </footer>

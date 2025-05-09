@@ -2,7 +2,7 @@
 // src/components/sections/Projects.astro
 // import { Picture } from 'astro:assets';
 import PlaceHolder from '../../assets/images/placeholder-1920x1080.jpg';
-import CustomButton from '../ui/CustomButton.astro';
+import CustomButton from '../../components/ui/CustomButton.astro';
 import { getCollection } from 'astro:content';
 
 const { lang = 'es' } = Astro.props;
@@ -130,7 +130,7 @@ console.log(projects.map((p) => ({ title: p.data.title, lang: p.data.lang, image
 						<img
 							src={project.data.image}
 							alt={project.data.title}
-							class="radius h-full w-full transform object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+							class="radius h-full w-full transform object-cover shadow-2xl transition-transform duration-300 ease-in-out hover:scale-110"
 							loading="lazy"
 						/>
 					</a>

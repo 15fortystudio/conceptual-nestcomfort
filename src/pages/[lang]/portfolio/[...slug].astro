@@ -38,8 +38,10 @@ if (!project) {
 	throw new Error('project no encontrado');
 }
 
+const locale = lang === 'en' ? 'en-US' : 'es-MX';
+
 const { title, image, date } = project.data;
-const formattedDate = new Date(date).toLocaleDateString('es-MX', {
+const formattedDate = new Date(date).toLocaleDateString(locale, {
 	weekday: 'short',
 	day: 'numeric',
 	month: 'long',
@@ -50,7 +52,7 @@ const { Content } = await project.render();
 ---
 
 <BaseLayout lang={lang}>
-	<Banner imageSrc={PortfolioBanner} key="contact" lang={lang} />
+	<Banner imageSrc={PortfolioBanner} key="portfolio" lang={lang} />
 	<section class="flex w-full flex-col gap-4">
 		<div class="flex h-100 flex-col gap-2 overflow-hidden py-4 md:h-150 xl:h-220">
 			<img src={image} alt={title} class="radius h-3/4 w-full object-cover shadow-2xl" />

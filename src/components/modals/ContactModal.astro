@@ -1,0 +1,95 @@
+---
+// src/components/modals/ContactModal.astro
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+	es: {
+		heading: 'Contáctanos',
+		title: '¿Tienes un proyecto en mente?',
+		description: 'Completa el formulario y te responderemos pronto.',
+		name: 'Tu nombre',
+		email: 'Correo electrónico',
+		message: 'Mensaje',
+		send: 'Enviar mensaje',
+	},
+	en: {
+		heading: 'Contact Us',
+		title: 'Do you have a project in mind?',
+		description: 'Fill out the form and we will get back to you soon.',
+		name: 'Your name',
+		email: 'Email address',
+		message: 'Message',
+		send: 'Send message',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<!-- Trigger Button -->
+<button
+	id="openContactModal"
+	class="radius hover:bg-link mx-auto inline-block cursor-pointer bg-neutral-600 px-4 py-2 text-center shadow-lg hover:scale-105"
+>
+	<span class="link text-white">{t.heading}</span>
+</button>
+
+<!-- Modal -->
+<div
+	id="contactModal"
+	class="fixed inset-0 z-50 flex hidden h-screen w-screen items-center justify-center bg-black/70"
+>
+	<div class="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+		<button
+			id="closeContactModal"
+			class="absolute top-2 right-2 text-xl font-bold text-neutral-500 hover:text-black"
+			aria-label="Cerrar modal">&times;</button
+		>
+
+		<h2 id="contactModalTitle" class="mb-2 text-xl font-semibold">{t.title}</h2>
+		<p class="mb-4 text-neutral-600">{t.description}</p>
+
+		<form name="contact" method="POST" data-netlify="true" class="flex flex-col gap-4">
+			<input type="hidden" name="form-name" value="contact" />
+			<input
+				type="text"
+				name="name"
+				required
+				placeholder={t.name}
+				class="rounded-lg border border-neutral-300 p-3"
+			/>
+			<input
+				type="email"
+				name="email"
+				required
+				placeholder={t.email}
+				class="rounded-lg border border-neutral-300 p-3"
+			/>
+			<textarea
+				name="message"
+				required
+				placeholder={t.message}
+				class="h-28 resize-none rounded-lg border border-neutral-300 p-3"></textarea>
+			<button type="submit" class="hover:bg-link rounded bg-neutral-600 px-4 py-2 text-white">
+				{t.send}
+			</button>
+		</form>
+	</div>
+</div>
+
+<script>
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+			const openBtn = document.getElementById('openContactModal');
+			const closeBtn = document.getElementById('closeContactModal');
+			const modal = document.getElementById('contactModal');
+
+			openBtn?.addEventListener('click', () => modal?.classList.remove('hidden'));
+			closeBtn?.addEventListener('click', () => modal?.classList.add('hidden'));
+
+			window.addEventListener('click', (e) => {
+				if (e.target === modal) modal.classList.add('hidden');
+			});
+		});
+	}
+</script>
