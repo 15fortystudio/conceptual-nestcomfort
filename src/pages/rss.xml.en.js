@@ -7,7 +7,6 @@ import { SITE_DATA } from '../config/consts.ts';
 const { TITLE, DESCRIPTION } = SITE_DATA.en; // Usar los datos en inglés
 
 export async function GET(context) {
-	// Obtener posts y proyectos
 	const posts = await getCollection('posts');
 	const projects = await getCollection('projects');
 
@@ -32,7 +31,7 @@ export async function GET(context) {
 	return rss({
 		title: TITLE,
 		description: DESCRIPTION,
-		site: context.site,
-		items: items,
+		site: context.site ?? 'https://nestcomfort.netlify.app/en/', // reemplaza con tu dominio real
+		items, // Usamos el arreglo combinado aquí
 	});
 }

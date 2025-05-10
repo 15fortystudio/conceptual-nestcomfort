@@ -7,7 +7,6 @@ import { SITE_DATA } from '../config/consts.ts';
 const { TITLE, DESCRIPTION } = SITE_DATA.es;
 
 export async function GET(context) {
-	// Obtener posts y proyectos
 	const posts = await getCollection('posts');
 	const projects = await getCollection('projects');
 
@@ -20,19 +19,19 @@ export async function GET(context) {
 		...spanishPosts.map((post) => ({
 			title: post.data.title,
 			pubDate: new Date(post.data.date),
-			link: `/posts/${post.slug}/`,
+			link: `/es/posts/${post.slug}/`,
 		})),
 		...spanishProjects.map((project) => ({
 			title: project.data.title,
 			pubDate: new Date(project.data.date),
-			link: `/projects/${project.slug}/`,
+			link: `/es/projects/${project.slug}/`,
 		})),
 	];
 
 	return rss({
 		title: TITLE,
 		description: DESCRIPTION,
-		site: context.site,
-		items: items,
+		site: context.site ?? 'https://nestcomfort.netlify.app/es/', // Reemplaza con tu dominio final
+		items, // <-- Aquí usas el arreglo combinado
 	});
 }
