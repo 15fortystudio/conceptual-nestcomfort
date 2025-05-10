@@ -5,18 +5,32 @@ const { lang = 'es', key } = Astro.props;
 
 const translations = {
 	es: {
-		index: 'Empieza hoy mismo',
-		virtual: 'Más información',
-		services: 'Nuestros servicios',
-		portfolio: 'Inspírate con nuestro portafolio',
-		cta: 'Ellos ya confiaron en nosotros',
+		index: {
+			title: 'Empieza hoy mismo',
+			link: `/${lang}/`,
+		},
+		services: {
+			title: 'Nuestros servicios',
+			link: `/${lang}/services`,
+		},
+		portfolio: {
+			title: 'Inspírate con nuestro portafolio',
+			link: `/${lang}/portfolio`,
+		},
 	},
 	en: {
-		index: 'Start today',
-		virtual: 'Learn more',
-		services: 'Our services',
-		portfolio: 'Get inspired by our portfolio',
-		cta: 'They already trusted us',
+		index: {
+			title: 'Start today',
+			link: `/${lang}/`,
+		},
+		services: {
+			title: 'Our services',
+			link: `/${lang}/services`,
+		},
+		portfolio: {
+			title: 'Get inspired by our portfolio',
+			link: `/${lang}/portfolio`,
+		},
 	},
 };
 
@@ -25,6 +39,7 @@ const t = translations[lang] ?? translations['es'];
 
 <a
 	class="radius hover:bg-link mx-auto inline-block cursor-pointer bg-neutral-600 px-4 py-2 text-center shadow-lg hover:scale-105"
+	href={t[key].link}
 >
-	<span class="link text-white">{t[key]}</span>
+	<span class="link text-white">{t[key].title}</span>
 </a>

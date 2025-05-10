@@ -3,21 +3,6 @@
 
 const { author = 'Autor desconocido', image, testimony, date, stars = '0' } = Astro.props;
 const starCount = parseFloat(stars);
-
-// const lang = t?.locale || 'es';
-
-// let formattedDate = 'Fecha desconocida';
-// const parsedDate = new Date(date);
-
-// if (!isNaN(parsedDate.getTime())) {
-// 	formattedDate = new Intl.DateTimeFormat(lang, {
-// 		year: 'numeric',
-// 		month: 'long',
-// 		day: 'numeric',
-// 	}).format(parsedDate);
-// }
-
-// console.log('Current lang:', lang);
 ---
 
 <article

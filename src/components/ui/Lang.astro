@@ -2,12 +2,6 @@
 // src/components/ui/Lang.astro
 import { getTranslations, Lang } from '../../utils/translation';
 
-// const { lang = 'es' } = Astro.props;
-// const pathname = Astro.url.pathname;
-
-// const currentSlug = pathname.split('/')[2] ?? '';
-// const otherLang = lang === 'es' ? 'en' : 'es';
-
 const lang = Astro.props.lang || 'es';
 const otherLang = lang === 'es' ? 'en' : 'es';
 
@@ -15,29 +9,8 @@ const labels = {
 	es: 'Inglés',
 	en: 'Español',
 };
-const pathname = Astro.url.pathname.split('/')[2] || ''; // Obtener el slug actual de la URL
+const pathname = Astro.url.pathname.split('/')[2] || '';
 const targetUrl = `/${otherLang}/${pathname}`;
-
-// Obtiene las traducciones para el idioma actual
-// const t = getTranslations(lang);
-
-// function getKeyFromSlug(lang: Lang, slug: string) {
-// 	for (const key in t) {
-// 		if (t[key].path === slug) {
-// 			return key;
-// 		}
-// 	}
-// 	return null;
-// }
-
-// const routeKey = getKeyFromSlug(lang, currentSlug);
-// const translatedSlug = routeKey ? t[routeKey].path : '';
-// const targetUrl = translatedSlug ? `/${otherLang}/${translatedSlug}` : `/${otherLang}/`;
-
-// const labels = {
-// 	es: { es: 'Español', en: 'Inglés' },
-// 	en: { es: 'Spanish', en: 'English' },
-// };
 ---
 
 <div class="link">
