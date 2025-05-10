@@ -1,26 +1,51 @@
 ---
-// src/components/BaseHead.astro
+// src/components/ui/BaseHead.astro
+import { SITE_DATA } from '../../config/consts';
+import type { Props } from '../../utils/metaData';
 
-const { lang = 'es' } = Astro.props;
+// Detectar idioma por ruta
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const { TITLE, DESCRIPTION } = SITE_DATA[lang];
 
-// Definir las traducciones aquí
-const translations = {
-	es: {
-		title: 'Bienvenido a Nest Comfort',
-		// Puedes agregar otras traducciones de metadatos si es necesario
-	},
-	en: {
-		title: 'Welcome to Nest Comfort',
-	},
-};
+// Recibir props del componente
+const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 
-const t = translations[lang] ?? translations['es'];
+// Construir metadatos dinámicos
+const fullTitle = title ? `${title} | ${TITLE}` : TITLE;
+const fullUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const fullImage = new URL(image, Astro.site).toString();
 ---
 
 <head>
+	<!-- Configuración básica -->
 	<meta charset="UTF-8" />
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="theme-color" content="#ffffff" />
+	<meta name="robots" content="index, follow" />
 	<meta name="generator" content={Astro.generator} />
-	<title>{t.title}</title>
+	<link rel="canonical" href={fullUrl} />
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<link rel="manifest" href="/site.webmanifest" />
+
+	<!-- Sitemap y RSS -->
+	<link rel="sitemap" href="/sitemap-index.xml" />
+	<link rel="alternate" type="application/rss+xml" title="Nest Comfort EN" href="/rss.en.xml" />
+	<link rel="alternate" type="application/rss+xml" title="Nest Comfort ES" href="/rss.es.xml" />
+
+	<!-- hreflang para SEO multilingüe -->
+	<link rel="alternate" hreflang="es" href={new URL('/', Astro.site).toString()} />
+	<link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site).toString()} />
+
+	<!-- Meta tags -->
+	<title>{fullTitle}</title>
+	<meta name="title" content={fullTitle} />
+	<meta name="description" content={description ?? DESCRIPTION} />
+	<meta property="og:title" content={fullTitle} />
+	<meta property="og:description" content={description ?? DESCRIPTION} />
+	<meta property="og:image" content={fullImage} />
+	<meta property="og:url" content={fullUrl} />
+	<meta property="og:type" content="website" />
 </head>
