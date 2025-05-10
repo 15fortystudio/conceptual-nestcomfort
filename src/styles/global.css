@@ -76,7 +76,7 @@ p,
 .logo {
 	font-family: var(--font-header);
 	color: var(--color-secondary);
-	font-size: 32px;
+	font-size: 24px;
 	font-weight: 800;
 }
 
