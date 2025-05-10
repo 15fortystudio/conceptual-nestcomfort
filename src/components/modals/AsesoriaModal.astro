@@ -43,14 +43,25 @@ const t = translations[lang] ?? translations['es'];
 
 		<h2 class="mb-4 text-2xl font-semibold">{t.title}</h2>
 
-		<form class="grid gap-4" action="https://formsubmit.co/TU_CORREO@ejemplo.com" method="POST">
-			<input type="text" name="name" placeholder={t.name} required class="rounded border p-3" />
-			<input type="email" name="email" placeholder={t.email} required class="rounded border p-3" />
-			<input type="text" name="spaceType" placeholder={t.type} class="rounded border p-3" />
-			<textarea name="message" placeholder={t.needs} rows="4" class="rounded border p-3"></textarea>
-			<button type="submit" class="hover:bg-link rounded bg-neutral-600 px-4 py-2 text-white"
-				>{t.send}</button
-			>
+		<form
+			name="advice"
+			class="grid gap-4"
+			method="POST"
+			data-netlify="true"
+			netlify-honeypot="bot-field"
+			action={`/${lang}/thanks`}
+		>
+			<!-- Hidden field for Netlify Forms -->
+			<input type="hidden" name="form-name" value="advice" />
+			<input type="hidden" name="bot-field" />
+
+			<input type="text" name="name" placeholder={t.name} required class="radius border p-3" />
+			<input type="email" name="email" placeholder={t.email} required class="radius border p-3" />
+			<input type="text" name="spaceType" placeholder={t.type} class="radius border p-3" />
+			<textarea name="message" placeholder={t.needs} rows="4" class="radius border p-3"></textarea>
+			<button type="submit" class="hover:bg-link radius bg-neutral-600 px-4 py-2 text-white">
+				{t.send}
+			</button>
 		</form>
 	</div>
 </div>

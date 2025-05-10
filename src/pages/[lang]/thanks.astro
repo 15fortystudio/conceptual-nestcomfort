@@ -1,0 +1,40 @@
+---
+// src/pages/[lang]/thanks.astro
+
+const { lang = 'es' } = Astro.props;
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+const translations = {
+	es: {
+		heading: 'Gracias',
+		title: '¡Gracias por tu mensaje!',
+		paragraph: 'Nos pondremos en contacto contigo muy pronto.',
+		return: 'Volver al inicio',
+	},
+	en: {
+		heading: 'Thanks',
+		title: 'Thanks for your message!',
+		paragraph: 'We will contact you very soon.',
+		return: 'Back to home',
+	},
+};
+
+const t = translations[lang] ?? translations['es'];
+---
+
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<title>{t.heading}</title>
+	</head>
+	<body class="flex min-h-screen items-center justify-center bg-white p-8 text-black">
+		<div class="max-w-md text-center">
+			<h1 class="mb-4 text-2xl font-bold">{t.title}</h1>
+			<p class="text-neutral-600">{t.paragraph}</p>
+			<a href={`/${lang}`} class="mt-6 inline-block text-blue-600 underline">{t.return}</a>
+		</div>
+	</body>
+</html>

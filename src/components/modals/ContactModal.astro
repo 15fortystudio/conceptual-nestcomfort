@@ -49,8 +49,16 @@ const t = translations[lang] ?? translations['es'];
 		<h2 id="contactModalTitle" class="mb-2 text-xl font-semibold">{t.title}</h2>
 		<p class="mb-4 text-neutral-600">{t.description}</p>
 
-		<form name="contact" method="POST" data-netlify="true" class="flex flex-col gap-4">
+		<form
+			name="contact"
+			method="POST"
+			data-netlify="true"
+			netlify-honeypot="bot-field"
+			action={`/${lang}/thanks`}
+			class="flex flex-col gap-4"
+		>
 			<input type="hidden" name="form-name" value="contact" />
+			<input type="hidden" name="bot-field" />
 			<input
 				type="text"
 				name="name"
@@ -70,6 +78,7 @@ const t = translations[lang] ?? translations['es'];
 				required
 				placeholder={t.message}
 				class="h-28 resize-none rounded-lg border border-neutral-300 p-3"></textarea>
+
 			<button type="submit" class="hover:bg-link rounded bg-neutral-600 px-4 py-2 text-white">
 				{t.send}
 			</button>

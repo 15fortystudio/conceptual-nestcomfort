@@ -16,5 +16,11 @@ const { lang = 'es' } = Astro.props;
 			<slot />
 		</main>
 		<Footer lang={lang} />
+		<!-- Hidden dummy form to ensure Netlify detects it -->
+		<form name="contact" netlify hidden>
+			<input type="text" name="name" />
+			<input type="email" name="email" />
+			<textarea name="message"></textarea>
+		</form>
 	</body>
 </html>
