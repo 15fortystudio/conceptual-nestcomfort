@@ -25,22 +25,22 @@ h3 {
 	font-family: var(--font-header);
 	color: var(--color-primary);
 	line-height: 1;
+	font-weight: 600;
+	padding: 1rem;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
 	font-size: clamp(3rem, 4vw, 6rem);
-	font-weight: 600;
 }
 
 h2 {
 	font-size: clamp(2rem, 2vw, 3rem);
-	font-weight: 500;
 	color: var(--color-link);
 }
 
 h3 {
 	font-size: clamp(1.5rem, 2vw, 2rem);
-	font-weight: 400;
 }
 
 p,
