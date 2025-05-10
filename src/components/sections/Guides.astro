@@ -29,7 +29,7 @@ const t = translations[lang];
 
 <section
 	id="download-section"
-	class="relative flex h-full w-full flex-col gap-8 overflow-hidden p-4 shadow-lg"
+	class="relative flex h-full w-full flex-col gap-4 overflow-hidden px-4 py-10 shadow-lg"
 >
 	<figure class="absolute inset-0 -z-10">
 		<Picture src={Guide} alt={t.alt} class="h-full w-full object-cover" />
@@ -37,49 +37,58 @@ const t = translations[lang];
 	</figure>
 
 	<!-- Overlay: oscurece ligeramente la imagen -->
-	<div class="absolute inset-0 -z-10 bg-black/70"></div>
+	<div class="absolute inset-0 -z-10 bg-black/80"></div>
+
+	<div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 to-transparent"></div>
+
 	<h2 id="download-heading" class="sr-only">{t.title}</h2>
 	<h2 class="my-auto text-center">{t.title}</h2>
-	<div class="flex justify-center gap-8">
+	<div class="grid grid-cols-1 items-end gap-2 text-center md:grid-cols-3">
 		<div class="flex flex-col gap-4">
-			<span class="p-white">{t.paragraph01}</span>
+			<span class="p-white flex min-h-[3.5rem] items-center justify-center text-center"
+				>{t.paragraph01}</span
+			>
 			<a
-				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.5rem] bg-neutral-600 px-[1rem] py-[0.5rem] hover:scale-110"
+				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.25rem] bg-neutral-600 px-[0.5rem] py-[0.5rem] hover:scale-105"
 				style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s ease, transform 0.3s ease; "
 				aria-label="Descargar archivo test01.txt"
 				href="/download/armonia-visual.txt"
 				download
 				role="button"
 			>
-				<span class="text-lg text-white">{t.download}</span>
+				<span class="text-base text-white">{t.download}</span>
 				<img src="/icons/download_24dp_FFFFFF_wght400.svg" class="h-6 w-6" alt="SVG de descarga" />
 			</a>
 		</div>
 		<div class="flex flex-col gap-4">
-			<span class="p-white">{t.paragraph02}</span>
+			<span class="p-white flex min-h-[3.5rem] items-center justify-center text-center"
+				>{t.paragraph02}</span
+			>
 			<a
-				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.5rem] bg-neutral-600 px-[1rem] py-[0.5rem] hover:scale-110"
+				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.25rem] bg-neutral-600 px-[0.5rem] py-[0.5rem] hover:scale-105"
 				style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s ease, transform 0.3s ease; "
 				aria-label="Descargar archivo test01.txt"
 				href="/download/seleccion-de-colores.txt"
 				download
 				role="button"
 			>
-				<span class="text-lg text-white">{t.download}</span>
+				<span class="text-base text-white">{t.download}</span>
 				<img src="/icons/download_24dp_FFFFFF_wght400.svg" class="h-6 w-6" alt="SVG de descarga" />
 			</a>
 		</div>
 		<div class="flex flex-col gap-4">
-			<span class="p-white">{t.paragraph03}</span>
+			<span class="p-white flex min-h-[3.5rem] items-center justify-center text-center"
+				>{t.paragraph03}</span
+			>
 			<a
-				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.5rem] bg-neutral-600 px-[1rem] py-[0.5rem] hover:scale-110"
+				class="radius hover:bg-link mx-auto flex cursor-pointer gap-[0.25rem] bg-neutral-600 px-[0.5rem] py-[0.5rem] hover:scale-105"
 				style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); transition: box-shadow 0.3s ease, transform 0.3s ease; "
 				aria-label="Descargar archivo test01.txt"
 				href="/download/ambientacion-natural-del-hogar.txt"
 				download
 				role="button"
 			>
-				<span class="text-lg text-white">{t.download}</span>
+				<span class="text-base text-white">{t.download}</span>
 				<img src="/icons/download_24dp_FFFFFF_wght400.svg" class="h-6 w-6" alt="SVG de descarga" />
 			</a>
 		</div>

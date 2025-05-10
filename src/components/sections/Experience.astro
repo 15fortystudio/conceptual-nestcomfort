@@ -24,13 +24,13 @@ const translations = {
 const t = translations[lang] ?? translations['es'];
 ---
 
-<section class="flex flex-col gap-12 p-10 text-center responsive">
+<section class="responsive flex flex-col gap-12 p-10 text-center">
 	<span class="sr-only">Experience</span>
 	<h2>{t.title}</h2>
 	<p class="text-secondary">{t.paragraph}</p>
 	<div class="flex justify-around gap-8 xl:gap-16">
-		<span class="border-primary text-secondary border-y-2 py-4 text-xl">{t.text01}</span>
-		<span class="border-primary text-secondary border-y-2 py-4 text-xl">{t.text02}</span>
-		<span class="border-primary text-secondary border-y-2 py-4 text-xl">{t.text03}</span>
+		<span class="border-link text-secondary border-y-2 py-4 text-base md:text-xl">{t.text01}</span>
+		<span class="border-link text-secondary border-y-2 py-4 text-base md:text-xl">{t.text02}</span>
+		<span class="border-link text-secondary border-y-2 py-4 text-base md:text-xl">{t.text03}</span>
 	</div>
 </section>
