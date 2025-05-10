@@ -1,6 +1,6 @@
 ---
 // src/components/sections/Projects.astro
-// import { Picture } from 'astro:assets';
+
 import PlaceHolder from '../../assets/images/placeholder-1920x1080.jpg';
 import CustomButton from '../../components/ui/CustomButton.astro';
 import { getCollection } from 'astro:content';
@@ -24,42 +24,11 @@ const t = translations[lang] ?? translations['es'];
 
 const projects = await getCollection('projects');
 
-// const rawProjects = projects
-// 	.filter((project) => project.data.lang === lang && project.data.image)
-// 	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-// 	.slice(0, 4);
-
 const latestProjects = projects
 	.filter((project) => project.data.lang === lang && project.data.image)
 	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 	.slice(0, 4);
 
-// Rellenar con placeholders si hay menos de 4
-// const latestProjects = Array.from({ length: 4 }, (_, i) => {
-// 	return (
-// 		rawProjects[i] ?? {
-// 			data: {
-// 				image: PlaceHolder.src,
-// 				title: 'Proyecto en desarrollo',
-// 				slug: '#',
-// 			},
-// 		}
-// 	);
-// });
-
-// const filledProjects = Array.from({ length: 4 }, (_, i) => {
-// 	return (
-// 		latestProjects[i] ?? {
-// 			data: {
-// 				title: 'Proyecto en desarrollo',
-// 				slug: '#',
-// 				image: PlaceHolder.src,
-// 			},
-// 		}
-// 	);
-// });
-
-// Asegurar que siempre haya 4 proyectos, rellenando con el placeholder
 const filledProjects = Array.from({ length: 4 }, (_, i) => {
 	return (
 		latestProjects[i] ?? {
@@ -75,11 +44,11 @@ const filledProjects = Array.from({ length: 4 }, (_, i) => {
 console.log(projects.map((p) => ({ title: p.data.title, lang: p.data.lang, image: p.data.image })));
 ---
 
-<section class="responsive flex w-full flex-col gap-10 overflow-hidden p-4 px-8">
+<section class="responsive flex w-full flex-col gap-10 overflow-hidden">
 	<span class="sr-only">Galería</span>
 	<div class="flex flex-col gap-10 text-center">
 		<h2>{t.title}</h2>
-		<p class="text-secondary">{t.paragraph}</p>
+		<p>{t.paragraph}</p>
 	</div>
 
 	<!-- Galería para escritorio -->
@@ -122,7 +91,7 @@ console.log(projects.map((p) => ({ title: p.data.title, lang: p.data.lang, image
 	</div>
 
 	<!-- Galería responsiva para móviles -->
-	<div class="flex flex-col gap-6 md:hidden">
+	<div class="flex flex-col gap-6 px-8 md:hidden">
 		{
 			filledProjects.map((project) => (
 				<figure class="radius h-[280px] shadow-2xl">

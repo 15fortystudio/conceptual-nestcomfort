@@ -252,7 +252,7 @@ const translations = {
 const t = translations[lang] ?? translations['es'];
 ---
 
-<article class="flex flex-col gap-20">
+<article class="responsive flex flex-col gap-20">
 	<div class="flex flex-col items-stretch gap-8 md:flex-row-reverse">
 		<figure class="shadow-2xl lg:w-1/2">
 			<Picture
@@ -265,7 +265,7 @@ const t = translations[lang] ?? translations['es'];
 		<div class="flex flex-col gap-8 lg:w-1/2">
 			<div class="flex flex-col justify-center gap-8">
 				<h2 class="text-center">{t[service].title}</h2>
-				<p>{t[service].paragraph}</p>
+				<p class="text-center md:text-left">{t[service].paragraph}</p>
 			</div>
 
 			<details open class="shadow-2xl">

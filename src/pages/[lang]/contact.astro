@@ -50,14 +50,14 @@ const t = translations[lang] ?? translations['es'];
 <BaseLayout lang={lang}>
 	<Banner imageSrc={ContactBanner} key="contact" lang={lang} />
 
-	<section class="mx-auto flex max-w-[80%] flex-col items-stretch gap-8">
+	<section class="responsive mx-auto flex flex-col items-stretch gap-8">
 		<span class="sr-only">{t.title}</span>
 		<div class="mx-auto flex w-full flex-col gap-8 md:flex-row">
 			<div class="mx-auto flex flex-col justify-center gap-8 text-left md:w-1/2">
 				<h2 class="text-center">{t.title}</h2>
-				<p>{t.paragraph01}</p>
-				<p class="">{t.paragraph02}</p>
-				<p class="">{t.paragraph03}</p>
+				<p class="text-center md:text-left">{t.paragraph01}</p>
+				<p class="text-center md:text-left">{t.paragraph02}</p>
+				<p class="text-center md:text-left">{t.paragraph03}</p>
 			</div>
 			<div class="radius relative min-h-[300px] items-stretch shadow-2xl md:w-1/2 xl:min-h-[500px]">
 				<div class="radius absolute inset-0 shadow-2xl">
